@@ -64,14 +64,6 @@ APE1 - Ethereum | [0x09b9905a472aa1d387c9c1d8d956aff5463837e8](https://etherscan
 APE2 - Ethereum | [0x5033973ea65c66a8745acdb4f8ecb326365de2be](https://etherscan.io/address/0x5033973ea65c66a8745acdb4f8ecb326365de2be)
 APEO - Ethereum | [0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9](https://etherscan.io/address/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9)
 
-### Metric Data Sources
-Metric | Data Source | Data Point
------- | ----------- | ----------
-APEIN price (ethereum) | Sushi Analytics | [Token price](https://analytics.sushi.com/tokens/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698)
-APEIN supply (ethereum) | Etherscan | [Max total supply](https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698?a=0xb53d3ac5a88798cc58a9d363bc64fa28f68c7c7f)
-APEIN supply (avalanche) | Etherscan | [Max total supply](https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698?a=0xb53d3ac5a88798cc58a9d363bc64fa28f68c7c7f)
-
-
 
 
 
