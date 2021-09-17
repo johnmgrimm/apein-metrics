@@ -6,7 +6,6 @@ View the [working mockup](https://apeisland.webflow.io/ape-in-dashboard-mockup) 
 ## Dev Notes
 - The prices for tokens should be obtained from exchange data where possible.
 - The charts are placeholders for the historical data and will need to plugin into a JS based charting library via JSON data input. 
-- We are primarily interested in the data retrieval but please specify if you can provide the data in a React based page.
 
 ## Metrics and Data Requirements
 
