@@ -14,9 +14,9 @@ Metric Name | Description | Data Source
 ----------- | ----------- | -----------
 Price | Price of APEIN | [Sushi Analtyics](https://analytics.sushi.com/tokens/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698)
 Historical Price | 30 day price history of APEIN | [Sushi Analtyics](https://analytics.sushi.com/tokens/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698)
-Supply | Max Total Supply | [Etherscan](https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698)
-Market Cap | Calculated | Price * Supply
-Burned | TBD | TBD
+Supply | Max Total Supply - To Be Burned | [Etherscan](https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698)
+Market Cap | Calculated | Price * Supply 
+To Be Burned | Token balance pending burn | Token balance of 0xC0Bb9Ee4D0691d3733B3fcD01728e571FE9e8B27 (filtered on To = Black Hole and Token = APEIN) 
 
 
 ### Avalanche Token Metrics
