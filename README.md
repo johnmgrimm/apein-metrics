@@ -22,9 +22,9 @@ To Be Burned | Token balance pending burn | Token balance of 0xC0Bb9Ee4D0691d373
 ### Avalanche Token Metrics
 Metric Name | Description | Data Source
 ----------- | ----------- | -----------
-Price | Price of APEIN | [Trader Joe Analytics](https://analytics.traderjoexyz.com/tokens/0x938fe3788222a74924e062120e7bfac829c719fb) or [Pangolin Analtyics](https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb)
-Historical Price | 30 day price history of APEIN | [Trader Joe Analytics](https://analytics.traderjoexyz.com/tokens/0x938fe3788222a74924e062120e7bfac829c719fb) or [Pangolin Analtyics](https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb)
-Supply | TBD | TBD
+Price | Price of APEIN | [Trader Joe Analytics](https://analytics.traderjoexyz.com/tokens/0x938fe3788222a74924e062120e7bfac829c719fb) and [Pangolin Analtyics](https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb) and [Kyber DMM Analytics](https://avax-info.dmm.exchange/token/0x938fe3788222a74924e062120e7bfac829c719fb)
+Historical Price | 30 day price history of APEIN | [Trader Joe Analytics](https://analytics.traderjoexyz.com/tokens/0x938fe3788222a74924e062120e7bfac829c719fb) and [Pangolin Analtyics](https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb) and [Kyber DMM Analytics](https://avax-info.dmm.exchange/token/0x938fe3788222a74924e062120e7bfac829c719fb)
+Supply | Static value | 37,500
 Market Cap | Calculated | Price * Supply
 Burned | TBD | TBD
 
@@ -44,8 +44,6 @@ Season 1 (Avalanche) | Total Max Supply | N/A
 Season 2 (Avalanche) | Total Max Supply | N/A
 Season 3 (Avalanche) | Total Max Supply | TBD
 Offspring (Avalanche) | Total Max Supply | TBD
-
-
 
 
 ## Token Addresses and Data Sources
