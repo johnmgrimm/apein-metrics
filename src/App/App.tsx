@@ -1,8 +1,9 @@
 import React from 'react';
 import logo from '../assets/logo.svg';
 import './App.css';
+import { TokenStats } from './TokenStats/TokenStats';
 
-function App() {
+export function App() {
   return (
     <div className="App">
       <div className="section-7 wf-section">
@@ -38,148 +39,14 @@ function App() {
           <div className="div-block-14">
             <h3 className="heading-3-copy">Token Stats</h3>
             <div className="w-layout-grid grid-12">
-              <div className="w-layout-grid grid-13">
-                <h4
-                  id="w-node-_8f0eaf22-a83d-f6fc-a7e8-620735c64873-68d99d19"
-                  className="metric-subheading"
-                >
-                  Ethereum
-                </h4>
-                <div className="w-layout-grid grid---5-up">
-                  <div
-                    id="w-node-_4453e7ca-408d-1980-9e95-24a861d3705c-61d3705c"
-                    className="metric-block"
-                  >
-                    <a
-                      href="https://www.coingecko.com/en/coins/ape-in"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="link-block-3 w-inline-block"
-                    >
-                      <div className="metric">$5.67</div>
-                    </a>
-                    <div className="metric-label-sm">price</div>
-                  </div>
-                  <div
-                    id="w-node-_4453e7ca-408d-1980-9e95-24a861d3705c-61d3705c"
-                    className="metric-block"
-                  >
-                    <a
-                      href="https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="link-block-3 w-inline-block"
-                    >
-                      <div className="metric">170,794</div>
-                    </a>
-                    <div className="metric-label-sm">Supply</div>
-                  </div>
-                  <div
-                    id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67b-97e6e67b"
-                    className="metric-block"
-                  >
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
-                      className="metric"
-                    >
-                      $968,401
-                    </div>
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
-                      className="metric-label-sm"
-                    >
-                      Market cap
-                    </div>
-                  </div>
-                  <div
-                    id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67b-97e6e67b"
-                    className="metric-block"
-                  >
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
-                      className="metric"
-                    >
-                      30,200
-                    </div>
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
-                      className="metric-label-sm"
-                    >
-                      burned
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="w-layout-grid grid-13">
-                <h4 className="metric-subheading">avalanche</h4>
-                <div className="w-layout-grid grid---5-up">
-                  <div
-                    id="w-node-_4453e7ca-408d-1980-9e95-24a861d3705c-61d3705c"
-                    className="metric-block"
-                  >
-                    <a
-                      href="https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="link-block-3 w-inline-block"
-                    >
-                      <div className="metric">$89.72</div>
-                    </a>
-                    <div className="metric-label-sm">price</div>
-                  </div>
-                  <div
-                    id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67b-97e6e67b"
-                    className="metric-block"
-                  >
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
-                      className="metric"
-                    >
-                      37,500
-                    </div>
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
-                      className="metric-label-sm"
-                    >
-                      Supply
-                    </div>
-                  </div>
-                  <div
-                    id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67b-97e6e67b"
-                    className="metric-block"
-                  >
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
-                      className="metric"
-                    >
-                      $3,364,500
-                    </div>
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
-                      className="metric-label-sm"
-                    >
-                      Market cap
-                    </div>
-                  </div>
-                  <div
-                    id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67b-97e6e67b"
-                    className="metric-block"
-                  >
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
-                      className="metric"
-                    >
-                      --
-                    </div>
-                    <div
-                      id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
-                      className="metric-label-sm"
-                    >
-                      burned
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <TokenStats
+                chain="ethereum"
+                contract="0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
+              />
+              <TokenStats
+                chain="avalanche"
+                contract="0x938fe3788222a74924e062120e7bfac829c719fb"
+              />
             </div>
             <div className="w-layout-grid grid-8">
               <div
@@ -403,5 +270,3 @@ function App() {
     </div>
   );
 }
-
-export { App };
