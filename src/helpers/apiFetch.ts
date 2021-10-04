@@ -1,5 +1,10 @@
 import axios from 'axios';
 
-export function apiFetch(url: string) {
-  return axios.get(url);
+type EthApiResponse = {
+  status: string;
+  message: string;
+  result: string;
+};
+export async function apiFetch(url: string) {
+  return axios.get<EthApiResponse>(url);
 }
