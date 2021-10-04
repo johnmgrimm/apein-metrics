@@ -1,26 +1,12 @@
-import React, { useEffect } from 'react';
-import { useAsyncFn } from 'react-use';
-import { apiFetch } from '../../helpers/apiFetch';
-import { getTokenStatsFromCoinGeckoApi } from '../../helpers/getTokenStatsFromCoinGeckoApi';
-// import styles from './TokenStats.module.scss';
+import React from 'react';
+import { Chain, Stats } from '../../helpers/getStats';
 
 type Props = {
-  chain: string;
-  contract: string;
+  chain: Chain;
+  data?: Stats;
+  loading: boolean;
 };
-export function TokenStats({ chain, contract }: Props) {
-  const [state, doFetch] = useAsyncFn(async () => {
-    const response = await apiFetch(
-      `https://api.coingecko.com/api/v3/coins/${chain}/contract/${contract}`,
-    );
-    console.log(response);
-    return getTokenStatsFromCoinGeckoApi(response.data);
-  });
-
-  useEffect(() => {
-    doFetch();
-  }, [doFetch]);
-
+export function TokenStats({ chain, data, loading }: Props) {
   return (
     <div className="w-layout-grid grid-13">
       <h4
@@ -41,10 +27,7 @@ export function TokenStats({ chain, contract }: Props) {
             className="link-block-3 w-inline-block"
           >
             <div className="metric">
-              $
-              {state.loading || !state.value
-                ? '-.--'
-                : state.value.price.toFixed(2)}
+              ${loading || !data ? '-.--' : data.price.toFixed(2)}
             </div>
           </a>
           <div className="metric-label-sm">price</div>
@@ -60,9 +43,9 @@ export function TokenStats({ chain, contract }: Props) {
             className="link-block-3 w-inline-block"
           >
             <div className="metric">
-              {state.loading || !state.value
+              {loading || !data
                 ? '---,---'
-                : state.value.supply.toLocaleString('en-US')}
+                : Math.round(data.supply).toLocaleString('en-US')}
             </div>
           </a>
           <div className="metric-label-sm">Supply</div>
@@ -76,9 +59,9 @@ export function TokenStats({ chain, contract }: Props) {
             className="metric"
           >
             $
-            {state.loading || !state.value
+            {loading || !data
               ? '---,---'
-              : state.value.marketCap.toLocaleString('en-US')}
+              : Math.round(data.marketCap).toLocaleString('en-US')}
           </div>
           <div
             id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"
@@ -95,7 +78,7 @@ export function TokenStats({ chain, contract }: Props) {
             id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
             className="metric"
           >
-            30,200
+            {loading || !data ? '---,---' : data.burned.toLocaleString('en-US')}
           </div>
           <div
             id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67e-97e6e67b"

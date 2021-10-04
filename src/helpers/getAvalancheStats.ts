@@ -1,8 +1,9 @@
+import { contractIdAvalanche } from './consts';
 import { fetchGraphQL } from './fetchGraphQL';
 
 const pangolinQuery = `
 query {
-  token(id: "0x938fe3788222a74924e062120e7bfac829c719fb") {
+  token(id: "${contractIdAvalanche}") {
     id
     symbol
     name
@@ -16,7 +17,7 @@ query {
 
 const ddmQuery = `
 query {
-  token(id: "0x938fe3788222a74924e062120e7bfac829c719fb") {
+  token(id: "${contractIdAvalanche}") {
     id
     symbol
     name
@@ -31,7 +32,7 @@ query {
 
 const joeQuery = `
 query {
-  token(id: "0x938fe3788222a74924e062120e7bfac829c719fb") {
+  token(id: "${contractIdAvalanche}") {
     id
     symbol
     name
@@ -44,24 +45,40 @@ query {
 }`;
 
 export async function getAvalancheStats() {
-  const pangolinData = await fetchGraphQL(
-    'https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex',
-    pangolinQuery,
-  );
-  const joeData = await fetchGraphQL(
-    'https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange',
-    joeQuery,
-  );
+  const [pangolinData, joeData, ddmData] = await Promise.all([
+    fetchGraphQL(
+      'https://api.thegraph.com/subgraphs/name/dasconnor/pangolin-dex',
+      pangolinQuery,
+    ),
+    fetchGraphQL(
+      'https://api.thegraph.com/subgraphs/name/traderjoe-xyz/exchange',
+      joeQuery,
+    ),
+    // source: https://thegraph.com/legacy-explorer/subgraph/dynamic-amm/dmm-exchange-avax
+    fetchGraphQL(
+      'https://api.thegraph.com/subgraphs/name/dynamic-amm/dmm-exchange-avax',
+      ddmQuery,
+    ),
+  ]);
 
-  // source: https://thegraph.com/legacy-explorer/subgraph/dynamic-amm/dmm-exchange-avax
-  const ddmData = await fetchGraphQL(
-    'https://api.thegraph.com/subgraphs/name/dynamic-amm/dmm-exchange-avax',
-    ddmQuery,
+  const priceHistoryPangolin = pangolinData.data.data.token.tokenDayData.map(
+    (point: { date: number; priceUSD: string }) => ({
+      date: point.date,
+      priceUSD: parseFloat(point.priceUSD),
+    }),
   );
-
-  const priceHistoryPangolin = pangolinData.data.token.tokenDayData;
-  const priceHistoryJoe = joeData.data.token.dayData;
-  const priceHistoryDdm = ddmData.data.token.tokenDayData;
+  const priceHistoryJoe = joeData.data.data.token.dayData.map(
+    (point: { date: number; priceUSD: string }) => ({
+      date: point.date,
+      priceUSD: parseFloat(point.priceUSD),
+    }),
+  );
+  const priceHistoryDdm = ddmData.data.data.token.tokenDayData.map(
+    (point: { date: number; priceUSD: string }) => ({
+      date: point.date,
+      priceUSD: parseFloat(point.priceUSD),
+    }),
+  );
   const price =
     (parseFloat(
       priceHistoryPangolin[priceHistoryPangolin.length - 1].priceUSD,
@@ -82,5 +99,6 @@ export async function getAvalancheStats() {
     supply,
     marketCap,
     burned,
+    priceHistory: priceHistoryPangolin,
   };
 }

@@ -1,12 +1,19 @@
 import React from 'react';
 import { App } from './App';
 import { render, screen, waitFor } from '@testing-library/react';
-import { apiFetch } from '../helpers/apiFetch';
+import { getAvalancheStats } from '../helpers/getAvalancheStats';
+import { getEthereumStats } from '../helpers/getEthereumStats';
 
-jest.mock('../helpers/apiFetch');
-(apiFetch as jest.Mock).mockResolvedValue({
+jest.mock('../helpers/getAvalancheStats');
+jest.mock('../helpers/getEthereumStats');
+(getAvalancheStats as jest.Mock).mockResolvedValue({
   burned: 0,
-  lastUpdated: '2021-10-03T12:14:33.760Z',
+  marketCap: 3695442,
+  price: 98.55,
+  supply: 37500,
+});
+(getEthereumStats as jest.Mock).mockResolvedValue({
+  burned: 0,
   marketCap: 3695442,
   price: 98.55,
   supply: 37500,

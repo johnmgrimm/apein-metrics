@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useAsyncFn } from 'react-use';
 import logo from '../assets/logo.svg';
+import { getAvalancheStats } from '../helpers/getAvalancheStats';
+import { getEthereumStats } from '../helpers/getEthereumStats';
 import './App.css';
 import { TokenStats } from './TokenStats/TokenStats';
 
 export function App() {
+  const [avaData, fetchAva] = useAsyncFn(async () => {
+    const result = await getAvalancheStats();
+    return result;
+  });
+  const [ethData, fetchEth] = useAsyncFn(async () => {
+    const result = await getEthereumStats();
+    return result;
+  });
+
+  useEffect(() => {
+    fetchAva();
+    fetchEth();
+  }, [fetchAva, fetchEth]);
+
   return (
     <div className="App">
       <div className="section-7 wf-section">
@@ -41,11 +58,13 @@ export function App() {
             <div className="w-layout-grid grid-12">
               <TokenStats
                 chain="ethereum"
-                contract="0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
+                data={ethData.value}
+                loading={ethData.loading}
               />
               <TokenStats
                 chain="avalanche"
-                contract="0x938fe3788222a74924e062120e7bfac829c719fb"
+                data={avaData.value}
+                loading={avaData.loading}
               />
             </div>
             <div className="w-layout-grid grid-8">
