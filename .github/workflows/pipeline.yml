@@ -1,0 +1,25 @@
+name: GitHub Pages
+
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+          cache: 'yarn'
+      - run: yarn install --frozen-lockfile
+      - run: yarn test
+      - name: Build
+        run: REACT_APP_COVALENT_API_KEY="$COVALENT_API_KEY" yarn build
+        env:
+          COVALENT_API_KEY: ${{ secrets.REACT_APP_COVALENT_API_KEY }}
+      - name: Deploy with gh-pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          yarn deploy -- -u "github-actions-bot <support+actions@github.com>"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
