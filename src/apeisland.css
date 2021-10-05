@@ -7013,6 +7013,10 @@ blockquote {
   font-weight: 600;
 }
 
+.metric a {
+  padding-bottom: 0;
+}
+
 .text-block-15 {
   margin-bottom: 32px;
 }

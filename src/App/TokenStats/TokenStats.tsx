@@ -20,34 +20,34 @@ export function TokenStats({ chain, data, loading }: Props) {
           id="w-node-_4453e7ca-408d-1980-9e95-24a861d3705c-61d3705c"
           className="metric-block"
         >
-          <a
-            href="https://www.coingecko.com/en/coins/ape-in"
-            target="_blank"
-            rel="noreferrer"
-            className="link-block-3 w-inline-block"
-          >
-            <div className="metric">
+          <div className="metric">
+            <a
+              href="https://www.coingecko.com/en/coins/ape-in"
+              target="_blank"
+              rel="noreferrer"
+              className="link-block-3 w-inline-block"
+            >
               ${loading || !data ? '-.--' : data.price.toFixed(2)}
-            </div>
-          </a>
+            </a>
+          </div>
           <div className="metric-label-sm">price</div>
         </div>
         <div
           id="w-node-_4453e7ca-408d-1980-9e95-24a861d3705c-61d3705c"
           className="metric-block"
         >
-          <a
-            href="https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
-            target="_blank"
-            rel="noreferrer"
-            className="link-block-3 w-inline-block"
-          >
-            <div className="metric">
+          <div className="metric">
+            <a
+              href="https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
+              target="_blank"
+              rel="noreferrer"
+              className="link-block-3 w-inline-block"
+            >
               {loading || !data
                 ? '---,---'
                 : Math.round(data.supply).toLocaleString('en-US')}
-            </div>
-          </a>
+            </a>
+          </div>
           <div className="metric-label-sm">Supply</div>
         </div>
         <div
