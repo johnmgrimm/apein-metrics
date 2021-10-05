@@ -3,7 +3,9 @@ import { useAsyncFn } from 'react-use';
 import logo from '../assets/logo.svg';
 import { getAvalancheStats } from '../helpers/getAvalancheStats';
 import { getEthereumStats } from '../helpers/getEthereumStats';
+import { getNftMetrics } from '../helpers/getNftMetrics';
 import './App.css';
+import { PriceChart } from './PriceChart/PriceChart';
 import { TokenStats } from './TokenStats/TokenStats';
 
 export function App() {
@@ -15,11 +17,16 @@ export function App() {
     const result = await getEthereumStats();
     return result;
   });
+  const [nftData, fetchNft] = useAsyncFn(async () => {
+    const result = await getNftMetrics();
+    return result;
+  });
 
   useEffect(() => {
     fetchAva();
     fetchEth();
-  }, [fetchAva, fetchEth]);
+    fetchNft();
+  }, [fetchAva, fetchEth, fetchNft]);
 
   return (
     <div className="App">
@@ -40,18 +47,6 @@ export function App() {
       </div>
       <div className="section-6 wf-section">
         <h1 className="innerpagetitle">Ape in metrics</h1>
-        <div className="text-block-20">
-          Stats are not realtime&nbsp;yet!&nbsp;Status are updated twice every
-          24 hours.
-          <a
-            href="https://www.coingecko.com/en/coins/ape-in"
-            rel="noreferrer"
-            target="_blank"
-          >
-            Check CoinGecko
-          </a>
-          for realtime pricing.
-        </div>
         <div className="container-6 w-container">
           <div className="div-block-14">
             <h3 className="heading-3-copy">Token Stats</h3>
@@ -78,10 +73,10 @@ export function App() {
                 id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
                 className="metric-chart"
               >
-                <div className="text-block-18">
-                  2 series line chart to show APEIN price over time for Ethereum
-                  and Avalanche
-                </div>
+                <PriceChart
+                  avaData={avaData.value?.priceHistory}
+                  ethData={ethData.value?.priceHistory}
+                />
               </div>
               <div
                 id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c6-68d99d19"
@@ -140,7 +135,9 @@ export function App() {
                   id="w-node-_02998a9b-acdd-933d-40d7-84692e25c658-68d99d19"
                   className="metric-text"
                 >
-                  757
+                  {nftData.loading || !nftData.value
+                    ? '--'
+                    : nftData.value.ape_1}
                 </div>
                 <a
                   href="https://etherscan.io/token/0x09b9905a472aa1d387c9c1d8d956aff5463837e8"
@@ -148,7 +145,11 @@ export function App() {
                   rel="noreferrer"
                   className="w-inline-block"
                 >
-                  <div className="metric-text">757</div>
+                  <div className="metric-text">
+                    {nftData.loading || !nftData.value
+                      ? '--'
+                      : nftData.value.ape_1}
+                  </div>
                 </a>
                 <div
                   id="w-node-_02998a9b-acdd-933d-40d7-84692e25c65a-68d99d19"
@@ -168,7 +169,9 @@ export function App() {
                   id="w-node-_074b1195-b1e0-ed66-e2fe-b5c9544fee89-68d99d19"
                   className="metric-text"
                 >
-                  1122
+                  {nftData.loading || !nftData.value
+                    ? '--'
+                    : nftData.value.ape_2}
                 </div>
                 <a
                   href="https://etherscan.io/token/0x5033973ea65c66a8745acdb4f8ecb326365de2be"
@@ -176,7 +179,11 @@ export function App() {
                   rel="noreferrer"
                   className="w-inline-block"
                 >
-                  <div className="metric-text">1122</div>
+                  <div className="metric-text">
+                    {nftData.loading || !nftData.value
+                      ? '--'
+                      : nftData.value.ape_2}
+                  </div>
                 </a>
                 <div
                   id="w-node-_074b1195-b1e0-ed66-e2fe-b5c9544fee8d-68d99d19"
@@ -222,7 +229,9 @@ export function App() {
                   id="w-node-_3baf22b9-674f-1d1a-af84-0fff8135f6fb-68d99d19"
                   className="metric-text"
                 >
-                  49
+                  {nftData.loading || !nftData.value
+                    ? '--'
+                    : nftData.value.ape_o}
                 </div>
                 <a
                   href="https://etherscan.io/token/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9"
@@ -230,7 +239,11 @@ export function App() {
                   rel="noreferrer"
                   className="w-inline-block"
                 >
-                  <div className="metric-text">49</div>
+                  <div className="metric-text">
+                    {nftData.loading || !nftData.value
+                      ? '--'
+                      : nftData.value.ape_o}
+                  </div>
                 </a>
                 <div
                   id="w-node-_3baf22b9-674f-1d1a-af84-0fff8135f6ff-68d99d19"

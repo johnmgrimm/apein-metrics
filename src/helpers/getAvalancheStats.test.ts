@@ -79,7 +79,7 @@ describe('getAvalancheStats', () => {
 
     const stats = await getAvalancheStats();
     expect(stats).toStrictEqual({
-      burned: 30200,
+      burned: 0,
       marketCap: 2072261.822725245,
       price: 55.2603152726732,
       supply: 37500,

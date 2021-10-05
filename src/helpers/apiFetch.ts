@@ -1,10 +1,16 @@
 import axios from 'axios';
 
-type EthApiResponse = {
+export type EtherscanApiResponse = {
   status: string;
   message: string;
   result: string;
 };
-export async function apiFetch(url: string) {
-  return axios.get<EthApiResponse>(url);
+export type CovalentApiResponse = {
+  data: {
+    items: any[];
+    pagination: any;
+  };
+};
+export async function apiFetch<T>(url: string) {
+  return axios.get<T>(url);
 }

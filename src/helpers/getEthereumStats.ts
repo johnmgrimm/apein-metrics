@@ -1,5 +1,5 @@
 import { fetchGraphQL } from './fetchGraphQL';
-import { apiFetch } from './apiFetch';
+import { apiFetch, EtherscanApiResponse } from './apiFetch';
 import { contractIdEthereum } from './consts';
 
 const sushiQuery = `
@@ -17,7 +17,7 @@ query {
 }`;
 
 export async function getEthereumStats() {
-  const ethData = await apiFetch(
+  const ethData = await apiFetch<EtherscanApiResponse>(
     `https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=${contractIdEthereum}`,
   );
   // source: https://thegraph.com/legacy-explorer/subgraph/sushiswap/exchange

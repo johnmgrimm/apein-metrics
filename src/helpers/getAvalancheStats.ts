@@ -86,12 +86,15 @@ export async function getAvalancheStats() {
       parseFloat(priceHistoryJoe[priceHistoryJoe.length - 1].priceUSD) +
       parseFloat(priceHistoryDdm[priceHistoryDdm.length - 1].priceUSD)) /
     3;
-  // There is probably some other way of calculating the totalsupply
-  // const totalSupply = sushiData.data.token.totalSupply;
+  // There might be some other way of calculating the totalsupply
+  // const avaData = await apiFetch<any>(
+  //   `https://api.covalenthq.com/v1/43114/tokens/${contractIdAvalanche}/token_holders/?page-size=10&key=${covalentApiKey}`,
+  // );
+  // console.log('avaData', avaData.data.data.items[0].total_supply); // 36 600
   const supply = 37500;
 
   // TBD
-  const burned = 30200;
+  const burned = 0;
 
   const marketCap = supply * price;
   return {

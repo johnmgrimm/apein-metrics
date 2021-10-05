@@ -18,6 +18,11 @@ jest.mock('../helpers/getEthereumStats');
   price: 98.55,
   supply: 37500,
 });
+jest.mock('./PriceChart/PriceChart', () => ({
+  PriceChart: () => {
+    return <div data-testid="PriceChart" />;
+  },
+}));
 
 test('renders application with title', async () => {
   render(<App />);
