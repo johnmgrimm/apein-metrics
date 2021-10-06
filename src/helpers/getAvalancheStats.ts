@@ -1,7 +1,15 @@
+import { calculateAverageHistoricalPrice } from './calculateAverageHistoricalPrice';
 import { avalancheChainId, contractIdAvalanche } from './consts';
 import { fetchGraphQL } from './fetchGraphQL';
 import { getTotalBurned } from './getTotalBurned';
 import { getTotalSupply } from './getTotalSupply';
+
+type BasePriceHistoryPoint = {
+  date: number;
+  priceUSD: string;
+};
+
+type BasePriceHistory = BasePriceHistoryPoint[];
 
 const pangolinQuery = `
 query {
@@ -47,8 +55,10 @@ query {
 }`;
 
 export async function getAvalancheStats() {
-  // const supply = 37500;
-  const supply = await getTotalSupply(avalancheChainId, contractIdAvalanche);
+  const totalSupply = await getTotalSupply(
+    avalancheChainId,
+    contractIdAvalanche,
+  );
 
   const [pangolinData, joeData, ddmData] = await Promise.all([
     fetchGraphQL(
@@ -66,40 +76,35 @@ export async function getAvalancheStats() {
     ),
   ]);
 
-  const priceHistoryPangolin = pangolinData.data.data.token.tokenDayData.map(
-    (point: { date: number; priceUSD: string }) => ({
-      date: point.date,
-      priceUSD: parseFloat(point.priceUSD),
-    }),
+  const priceHistoryPangolin = covertPricesToNumber(
+    pangolinData.data.data.token.tokenDayData,
   );
-  const priceHistoryJoe = joeData.data.data.token.dayData.map(
-    (point: { date: number; priceUSD: string }) => ({
-      date: point.date,
-      priceUSD: parseFloat(point.priceUSD),
-    }),
+  const priceHistoryJoe = covertPricesToNumber(joeData.data.data.token.dayData);
+  const priceHistoryDdm = covertPricesToNumber(
+    ddmData.data.data.token.tokenDayData,
   );
-  const priceHistoryDdm = ddmData.data.data.token.tokenDayData.map(
-    (point: { date: number; priceUSD: string }) => ({
-      date: point.date,
-      priceUSD: parseFloat(point.priceUSD),
-    }),
-  );
-  const price =
-    (parseFloat(
-      priceHistoryPangolin[priceHistoryPangolin.length - 1].priceUSD,
-    ) +
-      parseFloat(priceHistoryJoe[priceHistoryJoe.length - 1].priceUSD) +
-      parseFloat(priceHistoryDdm[priceHistoryDdm.length - 1].priceUSD)) /
-    3;
+  const priceHistory = calculateAverageHistoricalPrice([
+    priceHistoryPangolin,
+    priceHistoryJoe,
+    priceHistoryDdm,
+  ]);
+  const price = priceHistory[priceHistory.length - 1].priceUSD;
 
   const burned = await getTotalBurned(avalancheChainId, contractIdAvalanche);
 
-  const marketCap = supply * price;
+  const marketCap = totalSupply * price;
   return {
     price,
-    supply,
+    totalSupply,
     marketCap,
     burned,
-    priceHistory: priceHistoryPangolin,
+    priceHistory,
   };
+}
+
+function covertPricesToNumber(history: BasePriceHistory) {
+  return history.map((point: BasePriceHistoryPoint) => ({
+    date: point.date,
+    priceUSD: parseFloat(point.priceUSD),
+  }));
 }

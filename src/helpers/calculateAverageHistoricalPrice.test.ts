@@ -3,27 +3,27 @@ import { calculateAverageHistoricalPrice } from './calculateAverageHistoricalPri
 const history1 = [
   {
     date: 1632096000,
-    priceUSD: '83.16172842518431667975816007738979',
+    priceUSD: 15,
   },
   {
     date: 1632182400,
-    priceUSD: '83.90615456749739095962579236282512',
+    priceUSD: 25,
   },
 ];
 const history2 = [
   {
     date: 1632096000,
-    priceUSD: '83.16172842518431667975816007738979',
+    priceUSD: 30,
   },
   {
     date: 1632182400,
-    priceUSD: '83.90615456749739095962579236282512',
+    priceUSD: 40,
   },
 ];
 const history3 = [
   {
     date: 1632095000,
-    priceUSD: '83.16172842518431667975816007738979',
+    priceUSD: 50.5,
   },
 ];
 
@@ -33,14 +33,36 @@ describe('calculateAverageHistoricalPrice', () => {
       history1,
     );
   });
-  test.skip('averaged history', () => {
+  test('averaged history', () => {
     expect(calculateAverageHistoricalPrice([history1, history2])).toStrictEqual(
-      [],
+      [
+        {
+          date: 1632096000,
+          priceUSD: 22.5,
+        },
+        {
+          date: 1632182400,
+          priceUSD: 32.5,
+        },
+      ],
     );
   });
-  test.skip('non-overlaping history', () => {
+  test('non-overlaping history', () => {
     expect(calculateAverageHistoricalPrice([history1, history3])).toStrictEqual(
-      [],
+      [
+        {
+          date: 1632095000,
+          priceUSD: 50.5,
+        },
+        {
+          date: 1632096000,
+          priceUSD: 15,
+        },
+        {
+          date: 1632182400,
+          priceUSD: 25,
+        },
+      ],
     );
   });
 });

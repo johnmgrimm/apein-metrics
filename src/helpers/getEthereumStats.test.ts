@@ -39,7 +39,7 @@ describe('getEthereumStats', () => {
       burned: 30200,
       marketCap: 3102350.757084335,
       price: 13.649428011448169,
-      supply: 227287.968,
+      totalSupply: 227287.968,
       priceHistory: [
         {
           date: 1628985600,

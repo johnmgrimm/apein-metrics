@@ -18,7 +18,7 @@ query {
 }`;
 
 export async function getEthereumStats() {
-  const supply = await getTotalSupply(ethereumChainId, contractIdEthereum);
+  const totalSupply = await getTotalSupply(ethereumChainId, contractIdEthereum);
 
   // source: https://thegraph.com/legacy-explorer/subgraph/sushiswap/exchange
   const sushiData = await fetchGraphQL(
@@ -36,11 +36,11 @@ export async function getEthereumStats() {
   );
   const price = priceHistory[priceHistory.length - 1].priceUSD;
 
-  const marketCap = supply * price;
+  const marketCap = totalSupply * price;
 
   return {
     price,
-    supply,
+    totalSupply,
     marketCap,
     burned,
     priceHistory,
