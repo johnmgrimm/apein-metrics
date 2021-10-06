@@ -1,19 +1,16 @@
 import { getEthereumStats } from './getEthereumStats';
-import { apiFetch } from './apiFetch';
+import { getTotalSupply } from './getTotalSupply';
 import { fetchGraphQL } from './fetchGraphQL';
+import { getTotalBurned } from './getTotalBurned';
 
-jest.mock('./apiFetch');
+jest.mock('./getTotalSupply');
+jest.mock('./getTotalBurned');
 jest.mock('./fetchGraphQL');
 
 describe('getEthereumStats', () => {
   test('returns only required data', async () => {
-    (apiFetch as jest.Mock).mockResolvedValueOnce({
-      data: {
-        status: '1',
-        message: 'OK-Missing/Invalid API Key, rate limit of 1/5sec applied',
-        result: '227287968000000000000000',
-      },
-    });
+    (getTotalSupply as jest.Mock).mockResolvedValueOnce(227287.968);
+    (getTotalBurned as jest.Mock).mockResolvedValueOnce(30200);
 
     (fetchGraphQL as jest.Mock).mockResolvedValueOnce({
       data: {

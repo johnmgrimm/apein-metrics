@@ -1,11 +1,14 @@
 import { getAvalancheStats } from './getAvalancheStats';
 import { fetchGraphQL } from './fetchGraphQL';
 import { contractIdAvalanche } from './consts';
+import { getTotalSupply } from './getTotalSupply';
 
 jest.mock('./fetchGraphQL');
+jest.mock('./getTotalSupply');
 
 describe('getAvalancheStats', () => {
   test('returns only required data', async () => {
+    (getTotalSupply as jest.Mock).mockResolvedValue(37500);
     (fetchGraphQL as jest.Mock)
       // pangolin
       .mockResolvedValueOnce({

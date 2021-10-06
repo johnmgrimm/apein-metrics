@@ -1,6 +1,7 @@
 import { fetchGraphQL } from './fetchGraphQL';
-import { apiFetch, EtherscanApiResponse } from './apiFetch';
-import { contractIdEthereum } from './consts';
+import { contractIdEthereum, ethereumChainId } from './consts';
+import { getTotalSupply } from './getTotalSupply';
+import { getTotalBurned } from './getTotalBurned';
 
 const sushiQuery = `
 query {
@@ -17,14 +18,15 @@ query {
 }`;
 
 export async function getEthereumStats() {
-  const ethData = await apiFetch<EtherscanApiResponse>(
-    `https://api.etherscan.io/api?module=stats&action=tokensupply&contractaddress=${contractIdEthereum}`,
-  );
+  const supply = await getTotalSupply(ethereumChainId, contractIdEthereum);
+
   // source: https://thegraph.com/legacy-explorer/subgraph/sushiswap/exchange
   const sushiData = await fetchGraphQL(
     'https://api.thegraph.com/subgraphs/name/sushiswap/exchange',
     sushiQuery,
   );
+
+  const burned = await getTotalBurned(ethereumChainId, contractIdEthereum);
 
   const priceHistory = sushiData.data.data.token.dayData.map(
     (point: { date: number; priceUSD: string }) => ({
@@ -33,14 +35,9 @@ export async function getEthereumStats() {
     }),
   );
   const price = priceHistory[priceHistory.length - 1].priceUSD;
-  // There is probably some other way of calculating the totalsupply
-  // const totalSupply = sushiData.data.token.totalSupply;
-  const supply = parseInt(ethData.data.result) / 1e18;
-
-  // TBD
-  const burned = 30200;
 
   const marketCap = supply * price;
+
   return {
     price,
     supply,
