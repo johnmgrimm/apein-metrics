@@ -2,13 +2,16 @@ import { getAvalancheStats } from './getAvalancheStats';
 import { fetchGraphQL } from './fetchGraphQL';
 import { contractIdAvalanche } from './consts';
 import { getTotalSupply } from './getTotalSupply';
+import { getTotalBurned } from './getTotalBurned';
 
 jest.mock('./fetchGraphQL');
 jest.mock('./getTotalSupply');
+jest.mock('./getTotalBurned');
 
 describe('getAvalancheStats', () => {
   test('returns only required data', async () => {
     (getTotalSupply as jest.Mock).mockResolvedValue(37500);
+    (getTotalBurned as jest.Mock).mockResolvedValue(123);
     (fetchGraphQL as jest.Mock)
       // pangolin
       .mockResolvedValueOnce({
@@ -82,7 +85,7 @@ describe('getAvalancheStats', () => {
 
     const stats = await getAvalancheStats();
     expect(stats).toStrictEqual({
-      burned: 0,
+      burned: 123,
       marketCap: 2072261.822725245,
       price: 55.2603152726732,
       supply: 37500,

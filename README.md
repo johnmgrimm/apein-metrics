@@ -1109,3 +1109,13 @@ query {
   }
 }
 ```
+
+## Assumptions
+
+Minting (Unstake, Unstake All, StakeAll, Stake) - transfers from 0x0000000000000000000000000000000000000000 to any other address
+
+Burning (Burn) - transfers from any address to 0x0000000000000000000000000000000000000000
+
+NOTE: Initially it was stated that only transfers from 0xC0Bb9Ee4D0691d3733B3fcD01728e571FE9e8B27 to 0x0000000000000000000000000000000000000000 means burning ? e.g. https://etherscan.io/tx/0xf74aa8ca639e1c33d4506191fe8185edf81f56948b2470471b4eb9bac4e5947b (labeled "Burn")
+
+What is 0x9ab983a45b5688039b3ed08bec6fea19a3340c0a address that gets ~3% on each mint on ETH?

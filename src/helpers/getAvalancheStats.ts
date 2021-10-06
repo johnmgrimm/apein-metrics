@@ -1,5 +1,6 @@
 import { avalancheChainId, contractIdAvalanche } from './consts';
 import { fetchGraphQL } from './fetchGraphQL';
+import { getTotalBurned } from './getTotalBurned';
 import { getTotalSupply } from './getTotalSupply';
 
 const pangolinQuery = `
@@ -90,7 +91,8 @@ export async function getAvalancheStats() {
       parseFloat(priceHistoryJoe[priceHistoryJoe.length - 1].priceUSD) +
       parseFloat(priceHistoryDdm[priceHistoryDdm.length - 1].priceUSD)) /
     3;
-  const burned = 0;
+
+  const burned = await getTotalBurned(avalancheChainId, contractIdAvalanche);
 
   const marketCap = supply * price;
   return {
