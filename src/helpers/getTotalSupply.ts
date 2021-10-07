@@ -4,7 +4,7 @@ import { covalentApiKey } from './consts';
 // Returns token total supply (total_supply = minted - burned)
 export async function getTotalSupply(chainId: number, contractId: string) {
   const response = await apiFetch<CovalentApiResponse>(
-    `https://api.covalenthq.com/v1/${chainId}/tokens/${contractId}/token_holders/?page-size=10&key=${covalentApiKey}`,
+    `https://api.covalenthq.com/v1/${chainId}/tokens/${contractId}/token_holders/?limit=1&key=${covalentApiKey}`,
   );
   const holdersList = response.data.data.items;
 
