@@ -1,7 +1,5 @@
 import { apiFetch, CovalentApiResponse } from './apiFetch';
-import { covalentApiKey } from './consts';
-
-const blackHoleAddress = '0x0000000000000000000000000000000000000000';
+import { covalentApiKey, blackHoleAddress } from './consts';
 
 function getTransfersTotal(transfers: { delta: string }[]): number {
   return transfers.reduce(

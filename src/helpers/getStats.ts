@@ -7,7 +7,7 @@ export type HistoryPoint = { date: number; priceUSD: number };
 
 export type Stats = {
   price: number;
-  supply: number;
+  totalSupply: number;
   marketCap: number;
   burned: number;
   priceHistory: HistoryPoint[];

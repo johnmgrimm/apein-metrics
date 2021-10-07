@@ -45,7 +45,7 @@ export function TokenStats({ chain, data, loading }: Props) {
             >
               {loading || !data
                 ? '---,---'
-                : Math.round(data.supply).toLocaleString('en-US')}
+                : Math.round(data.totalSupply).toLocaleString('en-US')}
             </a>
           </div>
           <div className="metric-label-sm">Supply</div>

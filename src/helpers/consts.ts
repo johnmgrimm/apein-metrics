@@ -12,3 +12,5 @@ export const contractIdNftEthereum3 =
 
 export const ethereumChainId = 1;
 export const avalancheChainId = 43114;
+
+export const blackHoleAddress = '0x0000000000000000000000000000000000000000';
