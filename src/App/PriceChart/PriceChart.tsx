@@ -13,7 +13,6 @@ function convertToDateString(timestamp: number) {
 export function PriceChart({ avaData, ethData }: any) {
   return (
     <Line
-      style={{ height: '346px' }}
       data={{
         labels: avaData
           ? avaData.map((d: any, index: number) =>
@@ -23,13 +22,13 @@ export function PriceChart({ avaData, ethData }: any) {
         datasets: [
           {
             label: 'Avalanche',
-            data: avaData ? avaData.map((d: any) => d.priceUSD) : [],
+            data: avaData ? avaData.map((d: any) => d.value) : [],
             borderColor: 'rgb(232, 65, 66)',
             backgroundColor: 'rgba(232, 65, 66, 0.5)',
           },
           {
             label: 'Ethereum',
-            data: ethData ? ethData.map((d: any) => d.priceUSD) : [],
+            data: ethData ? ethData.map((d: any) => d.value) : [],
             borderColor: 'rgb(28, 28, 225)',
             backgroundColor: 'rgba(28, 28, 225, 0.5)',
           },

@@ -1,7 +1,7 @@
 export type PriceHistoryPoint = {
   date: number;
-  priceUSD: number;
-  prices?: number[];
+  value: number;
+  values?: number[];
 };
 
 export type PriceHistory = PriceHistoryPoint[];
@@ -22,19 +22,19 @@ export function calculateAverageHistoricalPrice(
     (all: PriceHistory, singlePoint: PriceHistoryPoint, index) => {
       // first point should be just wrapped as array
       if (index === 0) {
-        return [{ ...singlePoint, prices: [singlePoint.priceUSD] }];
+        return [{ ...singlePoint, values: [singlePoint.value] }];
       }
       const existingPoint = all.find(
         (point) => point.date === singlePoint.date,
       );
       if (!existingPoint) {
-        return [...all, { ...singlePoint, prices: [singlePoint.priceUSD] }];
+        return [...all, { ...singlePoint, values: [singlePoint.value] }];
       }
-      if (!existingPoint.prices) {
+      if (!existingPoint.values) {
         // this is highly improbable case (should never happen)
-        existingPoint.prices = [existingPoint.priceUSD];
+        existingPoint.values = [existingPoint.value];
       }
-      existingPoint.prices = [...existingPoint.prices, singlePoint.priceUSD];
+      existingPoint.values = [...existingPoint.values, singlePoint.value];
       return all;
     },
     [],
@@ -42,10 +42,10 @@ export function calculateAverageHistoricalPrice(
 
   const flattened = aggregated.map((point) => {
     return {
-      priceUSD: point.prices
-        ? point.prices.reduce((sum, price) => sum + price, 0) /
-          point.prices.length
-        : point.priceUSD,
+      value: point.values
+        ? point.values.reduce((sum, value) => sum + value, 0) /
+          point.values.length
+        : point.value,
       date: point.date,
     };
   });

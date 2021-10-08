@@ -5,6 +5,7 @@ import { getAvalancheStats } from '../helpers/getAvalancheStats';
 import { getEthereumStats } from '../helpers/getEthereumStats';
 import { getNftMetrics } from '../helpers/getNftMetrics';
 import './App.css';
+import { InflationChart } from './InflationChart/InflationChart';
 import { PriceChart } from './PriceChart/PriceChart';
 import { TokenStats } from './TokenStats/TokenStats';
 
@@ -88,10 +89,10 @@ export function App() {
                 id="w-node-_6d9d7ab5-e39f-1d6f-cf8b-be60c9eedc89-68d99d19"
                 className="metric-chart"
               >
-                <div className="text-block-18">
-                  2 series line chart to show aggregate APEIN&nbsp;inflation
-                  (mint - burn)&nbsp;for Ethereum and Avalanche
-                </div>
+                <InflationChart
+                  avaData={avaData.value ? avaData.value.inflationHistory : []}
+                  ethData={ethData.value ? ethData.value.inflationHistory : []}
+                />
               </div>
             </div>
           </div>

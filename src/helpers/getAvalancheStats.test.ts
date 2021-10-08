@@ -3,15 +3,18 @@ import { fetchGraphQL } from './fetchGraphQL';
 import { contractIdAvalanche } from './consts';
 import { getTotalSupply } from './getTotalSupply';
 import { getTotalBurned } from './getTotalBurned';
+import { getInflationHistory } from './getInflationHistory';
 
 jest.mock('./fetchGraphQL');
 jest.mock('./getTotalSupply');
 jest.mock('./getTotalBurned');
+jest.mock('./getInflationHistory');
 
 describe('getAvalancheStats', () => {
   test('returns only required data', async () => {
     (getTotalSupply as jest.Mock).mockResolvedValue(37500);
     (getTotalBurned as jest.Mock).mockResolvedValue(123);
+    (getInflationHistory as jest.Mock).mockResolvedValue([]);
     (fetchGraphQL as jest.Mock)
       // pangolin
       .mockResolvedValueOnce({
@@ -89,26 +92,27 @@ describe('getAvalancheStats', () => {
       marketCap: 3221480.7962811524,
       price: 85.9061545674974,
       totalSupply: 37500,
+      inflationHistory: [],
       priceHistory: [
         {
           date: 1630972800,
-          priceUSD: 15.256273873453459,
+          value: 15.256273873453459,
         },
         {
           date: 1631577600,
-          priceUSD: 60.316618431849925,
+          value: 60.316618431849925,
         },
         {
           date: 1631664000,
-          priceUSD: 65.61851737706874,
+          value: 65.61851737706874,
         },
         {
           date: 1632096000,
-          priceUSD: 45.179316584344875,
+          value: 45.179316584344875,
         },
         {
           date: 1632182400,
-          priceUSD: 85.9061545674974,
+          value: 85.9061545674974,
         },
       ],
     });

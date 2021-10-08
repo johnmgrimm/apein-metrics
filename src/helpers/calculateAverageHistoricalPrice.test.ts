@@ -3,27 +3,27 @@ import { calculateAverageHistoricalPrice } from './calculateAverageHistoricalPri
 const history1 = [
   {
     date: 1632096000,
-    priceUSD: 15,
+    value: 15,
   },
   {
     date: 1632182400,
-    priceUSD: 25,
+    value: 25,
   },
 ];
 const history2 = [
   {
     date: 1632096000,
-    priceUSD: 30,
+    value: 30,
   },
   {
     date: 1632182400,
-    priceUSD: 40,
+    value: 40,
   },
 ];
 const history3 = [
   {
     date: 1632095000,
-    priceUSD: 50.5,
+    value: 50.5,
   },
 ];
 
@@ -38,11 +38,11 @@ describe('calculateAverageHistoricalPrice', () => {
       [
         {
           date: 1632096000,
-          priceUSD: 22.5,
+          value: 22.5,
         },
         {
           date: 1632182400,
-          priceUSD: 32.5,
+          value: 32.5,
         },
       ],
     );
@@ -52,15 +52,15 @@ describe('calculateAverageHistoricalPrice', () => {
       [
         {
           date: 1632095000,
-          priceUSD: 50.5,
+          value: 50.5,
         },
         {
           date: 1632096000,
-          priceUSD: 15,
+          value: 15,
         },
         {
           date: 1632182400,
-          priceUSD: 25,
+          value: 25,
         },
       ],
     );

@@ -2,6 +2,7 @@ import { fetchGraphQL } from './fetchGraphQL';
 import { contractIdEthereum, ethereumChainId } from './consts';
 import { getTotalSupply } from './getTotalSupply';
 import { getTotalBurned } from './getTotalBurned';
+import { getInflationHistory } from './getInflationHistory';
 
 const sushiQuery = `
 query {
@@ -10,7 +11,7 @@ query {
     symbol
     name
     totalSupply
-    dayData {
+    dayData(last: 21) {
       date
       priceUSD
     }
@@ -26,15 +27,20 @@ export async function getEthereumStats() {
     sushiQuery,
   );
 
+  const inflationHistory = await getInflationHistory(
+    ethereumChainId,
+    contractIdEthereum,
+  );
+
   const burned = await getTotalBurned(ethereumChainId, contractIdEthereum);
 
   const priceHistory = sushiData.data.data.token.dayData.map(
     (point: { date: number; priceUSD: string }) => ({
       date: point.date,
-      priceUSD: parseFloat(point.priceUSD),
+      value: parseFloat(point.priceUSD),
     }),
   );
-  const price = priceHistory[priceHistory.length - 1].priceUSD;
+  const price = priceHistory[priceHistory.length - 1].value;
 
   const marketCap = totalSupply * price;
 
@@ -44,5 +50,6 @@ export async function getEthereumStats() {
     marketCap,
     burned,
     priceHistory,
+    inflationHistory,
   };
 }

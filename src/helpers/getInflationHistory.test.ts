@@ -1,5 +1,8 @@
 import { getInflationHistory } from './getInflationHistory';
-import { getLatestTransfers } from './getLatestTransfers';
+import {
+  getLatestBurnTransfers,
+  getLatestMintTransfers,
+} from './getLatestTransfers';
 import { contractIdEthereum } from './consts';
 
 jest.mock('./getLatestTransfers');
@@ -7,7 +10,7 @@ jest.mock('./getLatestTransfers');
 describe('getInflationHistory', () => {
   test('returns only required data', async () => {
     // burn
-    (getLatestTransfers as jest.Mock).mockResolvedValueOnce([
+    (getLatestBurnTransfers as jest.Mock).mockResolvedValueOnce([
       {
         id: {
           year: 2021,
@@ -26,7 +29,7 @@ describe('getInflationHistory', () => {
       },
     ]);
     // mint
-    (getLatestTransfers as jest.Mock).mockResolvedValueOnce([
+    (getLatestMintTransfers as jest.Mock).mockResolvedValueOnce([
       {
         id: {
           year: 2021,
@@ -50,16 +53,16 @@ describe('getInflationHistory', () => {
     const transfers = await getInflationHistory(1, contractIdEthereum);
     expect(transfers).toStrictEqual([
       {
-        dailySubtotal: 15093.807,
-        date: 1633125600000,
-      },
-      {
-        dailySubtotal: -30200.000000000004,
+        value: -30200.000000000004,
         date: 1632088800000,
       },
       {
-        dailySubtotal: 60400.00000000001,
+        value: 60400.00000000001,
         date: 1632175200000,
+      },
+      {
+        value: 15093.807,
+        date: 1633125600000,
       },
     ]);
   });

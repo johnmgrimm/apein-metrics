@@ -1,5 +1,8 @@
 import { blackHoleAddress } from './consts';
-import { getLatestTransfers } from './getLatestTransfers';
+import {
+  getLatestBurnTransfers,
+  getLatestMintTransfers,
+} from './getLatestTransfers';
 
 type ItemId = { year: number; month: number; day: number };
 type ItemBurn = {
@@ -11,39 +14,40 @@ type ItemMint = {
   dailySubtotal1: number;
   dailySubtotal2: number;
 };
-type ItemInflation = {
+export type ItemInflation = {
   date: number;
-  dailySubtotal: number;
+  value: number;
 };
+
 function convertIdToTimestamp(id: ItemId) {
   return new Date(`${id.year}-${id.month}-${id.day}`).getTime();
 }
 
 export async function getInflationHistory(chainId: number, contractId: string) {
-  const burnHistory = await getLatestTransfers(
+  const burnHistory = await getLatestBurnTransfers(
     chainId,
     contractId,
     blackHoleAddress,
-    'IN',
     21,
   );
-  const mintHistory = await getLatestTransfers(
+  const mintHistory = await getLatestMintTransfers(
     chainId,
     contractId,
     blackHoleAddress,
-    'OUT',
     21,
   );
 
   const burnHistoryDates = burnHistory.map((item: ItemBurn) => ({
     date: convertIdToTimestamp(item.id),
-    dailySubtotal: -item.dailySubtotal / 1e18,
+    value: -item.dailySubtotal / 1e18,
   }));
 
   const mintHistoryDates = mintHistory.map((item: ItemMint) => ({
     date: convertIdToTimestamp(item.id),
-    dailySubtotal: (item.dailySubtotal1 + item.dailySubtotal2) / 1e18,
+    value: (item.dailySubtotal1 + item.dailySubtotal2) / 1e18,
   }));
+
+  // console.log(burnHistoryDates, mintHistoryDates, 'burn-mint');
 
   const aggregated = burnHistoryDates
     .concat(mintHistoryDates)
@@ -57,10 +61,9 @@ export async function getInflationHistory(chainId: number, contractId: string) {
       if (!existingDate) {
         return [...all, item];
       }
-      existingDate.dailySubtotal =
-        existingDate.dailySubtotal + item.dailySubtotal;
+      existingDate.value = existingDate.value + item.value;
       return all;
     }, []);
 
-  return aggregated;
+  return aggregated.sort((a, b) => a.date - b.date);
 }
