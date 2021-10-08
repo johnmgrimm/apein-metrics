@@ -3,18 +3,42 @@ import { getTotalSupply } from './getTotalSupply';
 import { fetchGraphQL } from './fetchGraphQL';
 import { getTotalBurned } from './getTotalBurned';
 import { getInflationHistory } from './getInflationHistory';
+import { getInitialHistory } from './getInitialHistory';
 
 jest.mock('./getTotalSupply');
 jest.mock('./getTotalBurned');
 jest.mock('./fetchGraphQL');
 jest.mock('./getInflationHistory');
+jest.mock('./getInitialHistory');
 
 describe('getEthereumStats', () => {
   test('returns only required data', async () => {
     (getTotalSupply as jest.Mock).mockResolvedValueOnce(227287.968);
     (getTotalBurned as jest.Mock).mockResolvedValueOnce(30200);
     (getInflationHistory as jest.Mock).mockResolvedValueOnce([
-      { date: { year: 2021, month: 11, dayOfMonth: 10 }, value: 123 },
+      { date: 123123123, value: 123 },
+    ]);
+    (getInitialHistory as jest.Mock).mockReturnValue([
+      {
+        date: 1630972800000,
+        value: 0,
+      },
+      {
+        date: 1631577600000,
+        value: 0,
+      },
+      {
+        date: 1631664000000,
+        value: 0,
+      },
+      {
+        date: 1632096000000,
+        value: 0,
+      },
+      {
+        date: 1632182400000,
+        value: 0,
+      },
     ]);
 
     (fetchGraphQL as jest.Mock).mockResolvedValueOnce({
@@ -42,20 +66,30 @@ describe('getEthereumStats', () => {
     const stats = await getEthereumStats();
     expect(stats).toStrictEqual({
       burned: 30200,
-      marketCap: 3102350.757084335,
-      price: 13.649428011448169,
+      marketCap: 0,
+      price: 0,
       totalSupply: 227287.968,
-      inflationHistory: [
-        { date: { year: 2021, month: 11, dayOfMonth: 10 }, value: 123 },
-      ],
+      inflationHistory: [{ date: 123123123, value: 123 }],
       priceHistory: [
         {
-          date: 1628985600,
-          value: 14.752960463575892,
+          date: 1630972800000,
+          value: 0,
         },
         {
-          date: 1629072000,
-          value: 13.649428011448169,
+          date: 1631577600000,
+          value: 0,
+        },
+        {
+          date: 1631664000000,
+          value: 0,
+        },
+        {
+          date: 1632096000000,
+          value: 0,
+        },
+        {
+          date: 1632182400000,
+          value: 0,
         },
       ],
     });

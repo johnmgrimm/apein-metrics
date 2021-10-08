@@ -16,15 +16,15 @@ describe('getInitialHistory', () => {
   test('returns only required data', async () => {
     expect(getInitialHistory(3)).toStrictEqual([
       {
-        date: 1633125600000,
+        date: 1633478400000,
         value: 0,
       },
       {
-        date: 1632088800000,
+        date: 1633564800000,
         value: 0,
       },
       {
-        date: 1632175200000,
+        date: 1633651200000,
         value: 0,
       },
     ]);

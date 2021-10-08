@@ -1,69 +1,56 @@
+import dayjs from 'dayjs';
 import { blackHoleAddress } from './consts';
-import {
-  getLatestBurnTransfers,
-  getLatestMintTransfers,
-} from './getLatestTransfers';
+import { getInitialHistory } from './getInitialHistory';
+import { getLatestMintTransfers } from './getLatestMintTransfers';
+import { getLatestBurnTransfers } from './getLatestBurnTransfers';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 type ItemId = { year: number; month: number; day: number };
-type ItemBurn = {
-  id: ItemId;
-  dailySubtotal: number;
-};
-type ItemMint = {
-  id: ItemId;
-  dailySubtotal1: number;
-  dailySubtotal2: number;
-};
 export type ItemInflation = {
   date: number;
   value: number;
 };
 
 function convertIdToTimestamp(id: ItemId) {
-  return new Date(`${id.year}-${id.month}-${id.day}`).getTime();
+  return dayjs.utc(`${id.year}-${id.month}-${id.day}`).valueOf();
 }
 
-export async function getInflationHistory(chainId: number, contractId: string) {
+export async function getInflationHistory(
+  chainId: number,
+  contractId: string,
+  historyLength: number = 21,
+) {
   const burnHistory = await getLatestBurnTransfers(
     chainId,
     contractId,
     blackHoleAddress,
-    21,
+    historyLength,
   );
   const mintHistory = await getLatestMintTransfers(
     chainId,
     contractId,
     blackHoleAddress,
-    21,
+    historyLength,
   );
 
-  const burnHistoryDates = burnHistory.map((item: ItemBurn) => ({
-    date: convertIdToTimestamp(item.id),
-    value: -item.dailySubtotal / 1e18,
-  }));
+  const initialHistory = getInitialHistory(historyLength);
 
-  const mintHistoryDates = mintHistory.map((item: ItemMint) => ({
-    date: convertIdToTimestamp(item.id),
-    value: (item.dailySubtotal1 + item.dailySubtotal2) / 1e18,
-  }));
+  const aggregated = initialHistory.map((item) => {
+    const burned = burnHistory.find(
+      (burn) => convertIdToTimestamp(burn.id) === item.date,
+    );
+    const minted = mintHistory.find(
+      (mint) => convertIdToTimestamp(mint.id) === item.date,
+    );
+    const dailyTotal =
+      (minted ? (minted.dailySubtotal1 + minted.dailySubtotal2) / 1e18 : 0) -
+      (burned ? burned.dailySubtotal / 1e18 : 0);
+    return {
+      date: item.date,
+      value: dailyTotal,
+    };
+  });
 
-  // console.log(burnHistoryDates, mintHistoryDates, 'burn-mint');
-
-  const aggregated = burnHistoryDates
-    .concat(mintHistoryDates)
-    .reduce((all: ItemInflation[], item: ItemInflation, index: number) => {
-      if (index === 0) {
-        return [item];
-      }
-      const existingDate = all.find(
-        (existingItem) => existingItem.date === item.date,
-      );
-      if (!existingDate) {
-        return [...all, item];
-      }
-      existingDate.value = existingDate.value + item.value;
-      return all;
-    }, []);
-
-  return aggregated.sort((a, b) => a.date - b.date);
+  return aggregated;
 }

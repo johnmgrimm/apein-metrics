@@ -1,14 +1,12 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { ItemInflation } from '../../helpers/getInflationHistory';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+dayjs.extend(utc);
 
 function convertToDateString(timestamp: number) {
-  const date = new Date(timestamp * 1000);
-  return date.toLocaleDateString('en-US', {
-    day: '2-digit',
-    month: 'short',
-    year: '2-digit',
-  });
+  return dayjs.utc(timestamp).format("D MMM 'YY");
 }
 
 type Props = {
@@ -17,21 +15,9 @@ type Props = {
 };
 
 export function InflationChart({ avaData, ethData }: Props) {
-  console.log(avaData, ethData, 'chart');
-
-  const labels = avaData
-    .concat(ethData)
-    .reduce((all: number[], item: ItemInflation, index: number) => {
-      if (index === 0) {
-        return [item.date];
-      }
-      if (!all.includes(item.date)) {
-        all.push(item.date);
-      }
-      return all;
-    }, [])
-    .sort((a, b) => a - b)
-    .map((date: number) => convertToDateString(date));
+  const labels = avaData.map((item: ItemInflation) =>
+    convertToDateString(item.date),
+  );
 
   const avaDataset = avaData ? avaData.map((d: any) => d.value) : [];
   const ethDataset = ethData ? ethData.map((d: any) => d.value) : [];
@@ -39,7 +25,7 @@ export function InflationChart({ avaData, ethData }: Props) {
     <Line
       // style={{ height: '346px' }}
       data={{
-        labels: labels,
+        labels,
         datasets: [
           {
             label: 'Avalanche',

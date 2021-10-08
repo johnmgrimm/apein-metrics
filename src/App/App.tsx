@@ -3,6 +3,7 @@ import { useAsyncFn } from 'react-use';
 import logo from '../assets/logo.svg';
 import { getAvalancheStats } from '../helpers/getAvalancheStats';
 import { getEthereumStats } from '../helpers/getEthereumStats';
+import { getInitialHistory } from '../helpers/getInitialHistory';
 import { getNftMetrics } from '../helpers/getNftMetrics';
 import './App.css';
 import { InflationChart } from './InflationChart/InflationChart';
@@ -28,6 +29,7 @@ export function App() {
     fetchEth();
     fetchNft();
   }, [fetchAva, fetchEth, fetchNft]);
+  const initialHistory = getInitialHistory(21);
 
   return (
     <div className="App">
@@ -75,8 +77,12 @@ export function App() {
                 className="metric-chart"
               >
                 <PriceChart
-                  avaData={avaData.value?.priceHistory}
-                  ethData={ethData.value?.priceHistory}
+                  avaData={
+                    avaData.value ? avaData.value.priceHistory : initialHistory
+                  }
+                  ethData={
+                    ethData.value ? ethData.value.priceHistory : initialHistory
+                  }
                 />
               </div>
               <div
@@ -90,8 +96,16 @@ export function App() {
                 className="metric-chart"
               >
                 <InflationChart
-                  avaData={avaData.value ? avaData.value.inflationHistory : []}
-                  ethData={ethData.value ? ethData.value.inflationHistory : []}
+                  avaData={
+                    avaData.value
+                      ? avaData.value.inflationHistory
+                      : initialHistory
+                  }
+                  ethData={
+                    ethData.value
+                      ? ethData.value.inflationHistory
+                      : initialHistory
+                  }
                 />
               </div>
             </div>
@@ -138,7 +152,7 @@ export function App() {
                 >
                   {nftData.loading || !nftData.value
                     ? '--'
-                    : nftData.value.ape_1}
+                    : nftData.value.eth_ape_1}
                 </div>
                 <a
                   href="https://etherscan.io/token/0x09b9905a472aa1d387c9c1d8d956aff5463837e8"
@@ -149,7 +163,7 @@ export function App() {
                   <div className="metric-text">
                     {nftData.loading || !nftData.value
                       ? '--'
-                      : nftData.value.ape_1}
+                      : nftData.value.eth_ape_1}
                   </div>
                 </a>
                 <div
@@ -172,7 +186,7 @@ export function App() {
                 >
                   {nftData.loading || !nftData.value
                     ? '--'
-                    : nftData.value.ape_2}
+                    : nftData.value.eth_ape_2}
                 </div>
                 <a
                   href="https://etherscan.io/token/0x5033973ea65c66a8745acdb4f8ecb326365de2be"
@@ -183,7 +197,7 @@ export function App() {
                   <div className="metric-text">
                     {nftData.loading || !nftData.value
                       ? '--'
-                      : nftData.value.ape_2}
+                      : nftData.value.eth_ape_2}
                   </div>
                 </a>
                 <div
@@ -204,7 +218,9 @@ export function App() {
                   id="w-node-_502d6ad2-4129-2225-be6c-761e27cbefff-68d99d19"
                   className="metric-text"
                 >
-                  --
+                  {nftData.loading || !nftData.value
+                    ? '--'
+                    : nftData.value.ava_ape_1}
                 </div>
                 <div
                   id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf001-68d99d19"
@@ -216,7 +232,16 @@ export function App() {
                   id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf003-68d99d19"
                   className="metric-text"
                 >
-                  --
+                  <a
+                    href="https://cchain.explorer.avax.network/address/0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-inline-block"
+                  >
+                    {nftData.loading || !nftData.value
+                      ? '--'
+                      : nftData.value.ava_ape_1}
+                  </a>
                 </div>
               </div>
               <div className="w-layout-grid grid-10">
@@ -232,7 +257,7 @@ export function App() {
                 >
                   {nftData.loading || !nftData.value
                     ? '--'
-                    : nftData.value.ape_o}
+                    : nftData.value.eth_ape_o}
                 </div>
                 <a
                   href="https://etherscan.io/token/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9"
@@ -243,7 +268,7 @@ export function App() {
                   <div className="metric-text">
                     {nftData.loading || !nftData.value
                       ? '--'
-                      : nftData.value.ape_o}
+                      : nftData.value.eth_ape_o}
                   </div>
                 </a>
                 <div
@@ -287,6 +312,14 @@ export function App() {
                 className="link-block-7 w-inline-block"
               >
                 <div className="metric-text">Season 2 Apes</div>
+              </a>
+              <a
+                href="https://cchain.explorer.avax.network/address/0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE"
+                target="_blank"
+                rel="noreferrer"
+                className="link-block-7 w-inline-block"
+              >
+                <div className="metric-text">Season 3 Apes</div>
               </a>
               <a
                 href="https://etherscan.io/token/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9"

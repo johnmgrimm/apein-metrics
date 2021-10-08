@@ -3,15 +3,12 @@ import { contractIdEthereum, ethereumChainId } from './consts';
 import { getTotalSupply } from './getTotalSupply';
 import { getTotalBurned } from './getTotalBurned';
 import { getInflationHistory } from './getInflationHistory';
+import { getInitialHistory } from './getInitialHistory';
 
 const sushiQuery = `
 query {
   token(id: "${contractIdEthereum}") {
-    id
-    symbol
-    name
-    totalSupply
-    dayData(last: 21) {
+    dayData(orderBy: date, orderDirection: desc, first: 21) {
       date
       priceUSD
     }
@@ -26,6 +23,19 @@ export async function getEthereumStats() {
     'https://api.thegraph.com/subgraphs/name/sushiswap/exchange',
     sushiQuery,
   );
+  const priceHistoryData = sushiData.data.data.token.dayData;
+
+  const initialHistory = getInitialHistory(21);
+
+  const priceHistory = initialHistory.map((item) => {
+    const pricePoint = priceHistoryData.find(
+      (point: { date: number }) => point.date * 1000 === item.date,
+    );
+    return {
+      date: item.date,
+      value: pricePoint ? parseFloat(pricePoint.priceUSD) : 0,
+    };
+  });
 
   const inflationHistory = await getInflationHistory(
     ethereumChainId,
@@ -34,14 +44,7 @@ export async function getEthereumStats() {
 
   const burned = await getTotalBurned(ethereumChainId, contractIdEthereum);
 
-  const priceHistory = sushiData.data.data.token.dayData.map(
-    (point: { date: number; priceUSD: string }) => ({
-      date: point.date,
-      value: parseFloat(point.priceUSD),
-    }),
-  );
   const price = priceHistory[priceHistory.length - 1].value;
-
   const marketCap = totalSupply * price;
 
   return {

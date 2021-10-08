@@ -32,13 +32,23 @@ describe('getNftMetrics', () => {
         },
       },
     });
+    (apiFetch as jest.Mock).mockResolvedValueOnce({
+      data: {
+        data: {
+          pagination: {
+            total_count: 20,
+          },
+        },
+      },
+    });
 
     const stats = await getNftMetrics();
 
     expect(stats).toStrictEqual({
-      ape_1: 123,
-      ape_2: 12,
-      ape_o: 3,
+      eth_ape_1: 123,
+      eth_ape_2: 12,
+      eth_ape_o: 3,
+      ava_ape_1: 20,
     });
   });
 });
