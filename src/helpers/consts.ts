@@ -8,7 +8,10 @@ export const contractIdNftEthereum1 =
 export const contractIdNftEthereum2 =
   '0x5033973ea65c66a8745acdb4f8ecb326365de2be';
 export const contractIdNftEthereum3 =
+  '0x1a96191bd388d5c0468e5205e80c96c95804b877';
+export const contractIdNftEthereumO =
   '0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9';
+
 export const contractIdNftAvalanche1 =
   '0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE';
 

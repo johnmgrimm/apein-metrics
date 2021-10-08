@@ -1,6 +1,14 @@
 import React, { useEffect } from 'react';
 import { useAsyncFn } from 'react-use';
 import logo from '../assets/logo.svg';
+import {
+  contractIdEthereum,
+  contractIdNftAvalanche1,
+  contractIdNftEthereum1,
+  contractIdNftEthereum2,
+  contractIdNftEthereum3,
+  contractIdNftEthereumO,
+} from '../helpers/consts';
 import { getAvalancheStats } from '../helpers/getAvalancheStats';
 import { getEthereumStats } from '../helpers/getEthereumStats';
 import { getInitialHistory } from '../helpers/getInitialHistory';
@@ -9,6 +17,13 @@ import './App.css';
 import { InflationChart } from './InflationChart/InflationChart';
 import { PriceChart } from './PriceChart/PriceChart';
 import { TokenStats } from './TokenStats/TokenStats';
+
+function getEtherscanTokenUrl(contractId: string) {
+  return `https://etherscan.io/token/${contractId}`;
+}
+function getCChainTokenUrl(contractId: string) {
+  return `https://cchain.explorer.avax.network/tokens/${contractId}`;
+}
 
 export function App() {
   const [avaData, fetchAva] = useAsyncFn(async () => {
@@ -136,7 +151,7 @@ export function App() {
                   id="w-node-_8f7464e9-5331-1239-bc89-7eb1d0d8abb7-68d99d19"
                   className="metric-label"
                 >
-                  avalanche
+                  Avalanche
                 </div>
               </div>
               <div className="w-layout-grid grid-10">
@@ -155,7 +170,7 @@ export function App() {
                     : nftData.value.eth_ape_1}
                 </div>
                 <a
-                  href="https://etherscan.io/token/0x09b9905a472aa1d387c9c1d8d956aff5463837e8"
+                  href={getEtherscanTokenUrl(contractIdNftEthereum1)}
                   target="_blank"
                   rel="noreferrer"
                   className="w-inline-block"
@@ -189,7 +204,7 @@ export function App() {
                     : nftData.value.eth_ape_2}
                 </div>
                 <a
-                  href="https://etherscan.io/token/0x5033973ea65c66a8745acdb4f8ecb326365de2be"
+                  href={getEtherscanTokenUrl(contractIdNftEthereum2)}
                   target="_blank"
                   rel="noreferrer"
                   className="w-inline-block"
@@ -233,7 +248,7 @@ export function App() {
                   className="metric-text"
                 >
                   <a
-                    href="https://cchain.explorer.avax.network/address/0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE"
+                    href={getCChainTokenUrl(contractIdNftAvalanche1)}
                     target="_blank"
                     rel="noreferrer"
                     className="w-inline-block"
@@ -260,7 +275,7 @@ export function App() {
                     : nftData.value.eth_ape_o}
                 </div>
                 <a
-                  href="https://etherscan.io/token/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9"
+                  href={getEtherscanTokenUrl(contractIdNftEthereumO)}
                   target="_blank"
                   rel="noreferrer"
                   className="w-inline-block"
@@ -282,7 +297,7 @@ export function App() {
             <h3 className="heading-3">Contracts</h3>
             <div className="w-layout-grid grid-11">
               <a
-                href="https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
+                href={getEtherscanTokenUrl(contractIdEthereum)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-4 w-inline-block"
@@ -298,36 +313,44 @@ export function App() {
                 <div className="metric-text">APEIN&nbsp;- Avalanche</div>
               </a>
               <a
-                href="https://etherscan.io/token/0x09b9905a472aa1d387c9c1d8d956aff5463837e8"
+                href={getEtherscanTokenUrl(contractIdNftEthereum1)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-6 w-inline-block"
               >
-                <div className="metric-text">Season 1 Apes</div>
+                <div className="metric-text">Season 1 Apes - Ethereum</div>
               </a>
               <a
-                href="https://etherscan.io/token/0x5033973ea65c66a8745acdb4f8ecb326365de2be"
+                href={getEtherscanTokenUrl(contractIdNftEthereum2)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-7 w-inline-block"
               >
-                <div className="metric-text">Season 2 Apes</div>
+                <div className="metric-text">Season 2 Apes - Ethereum</div>
               </a>
               <a
-                href="https://cchain.explorer.avax.network/address/0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE"
+                href={getEtherscanTokenUrl(contractIdNftEthereum3)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-7 w-inline-block"
               >
-                <div className="metric-text">Season 3 Apes</div>
+                <div className="metric-text">Season 3 Apes - Ethereum</div>
               </a>
               <a
-                href="https://etherscan.io/token/0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9"
+                href={getCChainTokenUrl(contractIdNftAvalanche1)}
+                target="_blank"
+                rel="noreferrer"
+                className="link-block-7 w-inline-block"
+              >
+                <div className="metric-text">Season 1 Apes - Avalanche</div>
+              </a>
+              <a
+                href={getEtherscanTokenUrl(contractIdNftEthereumO)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-8 w-inline-block"
               >
-                <div className="metric-text">Offspring Apes</div>
+                <div className="metric-text">Offspring Apes - Ethereum</div>
               </a>
             </div>
           </div>
