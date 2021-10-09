@@ -1,6 +1,6 @@
 import { getAvalancheStats } from './getAvalancheStats';
 import { getEthereumStats } from './getEthereumStats';
-import { ItemInflation } from './getInflationHistory';
+import { DataPoint } from './getInflationHistory';
 
 export type Chain = 'ethereum' | 'avalanche';
 
@@ -12,7 +12,7 @@ export type Stats = {
   marketCap: number;
   burned: number;
   priceHistory: HistoryPoint[];
-  inflationHistory: ItemInflation[];
+  inflationHistory: DataPoint[];
 };
 
 export async function getStats(chain: Chain): Promise<Stats> {

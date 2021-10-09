@@ -1,16 +1,16 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
 import { formatDateString } from '../../helpers/formatDateString';
-import { ItemInflation } from '../../helpers/getInflationHistory';
+import { DataPoint } from '../../helpers/getInflationHistory';
 
 type Props = {
-  data: ItemInflation[];
+  data: DataPoint[];
   label: string;
   color: string;
 };
 
 export function PriceChart({ data, label, color }: Props) {
-  const labels = data.map((item: ItemInflation) => formatDateString(item.date));
+  const labels = data.map((item: DataPoint) => formatDateString(item.date));
 
   const dataset = data ? data.map((d: any) => d.value) : [];
 

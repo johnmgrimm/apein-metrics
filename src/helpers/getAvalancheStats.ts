@@ -1,6 +1,6 @@
 import { avalancheChainId, contractIdAvalanche } from './consts';
 import { fetchGraphQL } from './fetchGraphQL';
-import { getInflationHistory, ItemInflation } from './getInflationHistory';
+import { getInflationHistory, DataPoint } from './getInflationHistory';
 import { getInitialHistory } from './getInitialHistory';
 import { getTotalBurned } from './getTotalBurned';
 import { getTotalSupply } from './getTotalSupply';
@@ -81,7 +81,7 @@ export async function getAvalancheStats() {
 
   const initialHistory = getInitialHistory(21);
 
-  const priceHistory = initialHistory.map((item: ItemInflation) => {
+  const priceHistory = initialHistory.map((item: DataPoint) => {
     const pricePointPangolin = priceHistoryPangolin.find(
       (point: { date: number }) => point.date * 1000 === item.date,
     );

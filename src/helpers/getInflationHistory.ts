@@ -7,7 +7,7 @@ import utc from 'dayjs/plugin/utc';
 dayjs.extend(utc);
 
 type ItemId = { year: number; month: number; day: number };
-export type ItemInflation = {
+export type DataPoint = {
   date: number;
   value: number;
 };

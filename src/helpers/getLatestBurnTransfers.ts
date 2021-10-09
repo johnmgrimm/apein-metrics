@@ -2,20 +2,24 @@ import { apiFetch, CovalentApiResponse } from './apiFetch';
 import { covalentApiKey } from './consts';
 
 function getMatch(date: string, direction: 'IN' | 'OUT') {
-  return JSON.stringify({
-    block_signed_at: { $gt: date },
-    'transfers.0.transfer_type': direction,
-  });
+  return encodeURI(
+    JSON.stringify({
+      block_signed_at: { $gt: date },
+      'transfers.0.transfer_type': direction,
+    }),
+  );
 }
 
-const burnGroup = JSON.stringify({
-  _id: {
-    year: { $year: 'block_signed_at' },
-    month: { $month: 'block_signed_at' },
-    day: { $dayOfMonth: 'block_signed_at' },
-  },
-  dailySubtotal: { $sum: 'transfers.0.delta' },
-});
+const burnGroup = encodeURI(
+  JSON.stringify({
+    _id: {
+      year: { $year: 'block_signed_at' },
+      month: { $month: 'block_signed_at' },
+      day: { $dayOfMonth: 'block_signed_at' },
+    },
+    dailySubtotal: { $sum: 'transfers.0.delta' },
+  }),
+);
 
 export async function getLatestBurnTransfers(
   chainId: number,
