@@ -4,6 +4,18 @@ The Ape In metrics dashboard provides and at-a-glance view of the Ape Island met
 
 View the [working mockup](https://apeisland.webflow.io/ape-in-dashboard-mockup) of the dashboard.
 
+## How to build production release
+
+1. Adjust "homepage" in `./package.json` file.
+2. Execute `yarn build`.
+3. Upload content of the `./build` directory to your server. Files on the server should be accessible using the URL specified as "homepage" in the `./package.json` file (in the 1. step)
+
+OR
+
+Use Github Pages and Github Actions defined in `./github/workflows/pipeline.yml` file.
+Then you will also have to adjust "homepage" address inside the `./package.json` file
+but deployments should be automatic whenever you push new changes to the repo.
+
 ## Dev Notes
 
 - The prices for tokens should be obtained from exchange data where possible.
