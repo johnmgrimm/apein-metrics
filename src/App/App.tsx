@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 import { useAsyncFn } from 'react-use';
 import logo from '../assets/logo.svg';
 import {
+  contractIdAvalanche,
   contractIdEthereum,
-  contractIdNftAvalanche1,
+  contractIdNftAvalanche3,
   contractIdNftEthereum1,
   contractIdNftEthereum2,
   contractIdNftEthereum3,
@@ -235,27 +236,36 @@ export function App() {
                 >
                   {nftData.loading || !nftData.value
                     ? '--'
-                    : nftData.value.ava_ape_1}
+                    : nftData.value.ava_ape_3 + nftData.value.eth_ape_3}
                 </div>
                 <div
                   id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf001-68d99d19"
                   className="metric-text"
                 >
-                  --
-                </div>
-                <div
-                  id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf003-68d99d19"
-                  className="metric-text"
-                >
                   <a
-                    href={getCChainTokenUrl(contractIdNftAvalanche1)}
+                    href={getEtherscanTokenUrl(contractIdNftEthereum3)}
                     target="_blank"
                     rel="noreferrer"
                     className="w-inline-block"
                   >
                     {nftData.loading || !nftData.value
                       ? '--'
-                      : nftData.value.ava_ape_1}
+                      : nftData.value.eth_ape_3}
+                  </a>
+                </div>
+                <div
+                  id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf003-68d99d19"
+                  className="metric-text"
+                >
+                  <a
+                    href={getCChainTokenUrl(contractIdNftAvalanche3)}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-inline-block"
+                  >
+                    {nftData.loading || !nftData.value
+                      ? '--'
+                      : nftData.value.ava_ape_3}
                   </a>
                 </div>
               </div>
@@ -305,7 +315,7 @@ export function App() {
                 <div className="metric-text">APEIN&nbsp;- Ethereum</div>
               </a>
               <a
-                href="https://info.pangolin.exchange/#/token/0x938fe3788222a74924e062120e7bfac829c719fb"
+                href={getCChainTokenUrl(contractIdAvalanche)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-5 w-inline-block"
@@ -337,12 +347,12 @@ export function App() {
                 <div className="metric-text">Season 3 Apes - Ethereum</div>
               </a>
               <a
-                href={getCChainTokenUrl(contractIdNftAvalanche1)}
+                href={getCChainTokenUrl(contractIdNftAvalanche3)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-7 w-inline-block"
               >
-                <div className="metric-text">Season 1 Apes - Avalanche</div>
+                <div className="metric-text">Season 3 Apes - Avalanche</div>
               </a>
               <a
                 href={getEtherscanTokenUrl(contractIdNftEthereumO)}

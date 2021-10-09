@@ -21,7 +21,7 @@ jest.mock('../helpers/getNftMetrics');
   supply: 37500,
 });
 (getNftMetrics as jest.Mock).mockResolvedValue({
-  ava_ape_1: 123,
+  ava_ape_3: 123,
   eth_ape_1: 123,
   eth_ape_2: 123,
   eth_ape_3: 123,

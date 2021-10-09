@@ -58,7 +58,7 @@ describe('getNftMetrics', () => {
       eth_ape_2: 12,
       eth_ape_3: 3,
       eth_ape_o: 20,
-      ava_ape_1: 15,
+      ava_ape_3: 15,
     });
   });
 });

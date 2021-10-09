@@ -12,7 +12,7 @@ export const contractIdNftEthereum3 =
 export const contractIdNftEthereumO =
   '0xcdece16fb4ef3c171e163b7c72023fff4d3e2bd9';
 
-export const contractIdNftAvalanche1 =
+export const contractIdNftAvalanche3 =
   '0x57E0879A663D07fAd0399bAFFf0C1f3c5D79d7FE';
 
 export const ethereumChainId = 1;
