@@ -82,24 +82,51 @@ export function App() {
               />
             </div>
             <div className="w-layout-grid grid-8">
-              <div
-                id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
-                className="metric-label"
-              >
-                Price history
-              </div>
-              <div
-                id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
-                className="metric-chart"
-              >
-                <PriceChart
-                  avaData={
-                    avaData.value ? avaData.value.priceHistory : initialHistory
-                  }
-                  ethData={
-                    ethData.value ? ethData.value.priceHistory : initialHistory
-                  }
-                />
+              <div className="w-layout-grid grid-12">
+                <div className="w-layout-grid grid-13">
+                  <div
+                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
+                    className="metric-label"
+                  >
+                    Price history
+                  </div>
+                  <div
+                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
+                    className="metric-chart"
+                  >
+                    <PriceChart
+                      label="Ethereum"
+                      color="rgb(28, 28, 225)"
+                      data={
+                        ethData.value
+                          ? ethData.value.priceHistory
+                          : initialHistory
+                      }
+                    />
+                  </div>
+                </div>
+                <div className="w-layout-grid grid-13">
+                  <div
+                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
+                    className="metric-label"
+                  >
+                    Price history
+                  </div>
+                  <div
+                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
+                    className="metric-chart"
+                  >
+                    <PriceChart
+                      label="Avalanche"
+                      color="rgb(232, 65, 66)"
+                      data={
+                        avaData.value
+                          ? avaData.value.priceHistory
+                          : initialHistory
+                      }
+                    />
+                  </div>
+                </div>
               </div>
               <div
                 id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c6-68d99d19"

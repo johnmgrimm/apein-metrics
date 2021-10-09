@@ -4,17 +4,15 @@ import { formatDateString } from '../../helpers/formatDateString';
 import { ItemInflation } from '../../helpers/getInflationHistory';
 
 type Props = {
-  avaData: ItemInflation[];
-  ethData: ItemInflation[];
+  data: ItemInflation[];
+  label: string;
+  color: string;
 };
 
-export function PriceChart({ avaData, ethData }: Props) {
-  const labels = avaData.map((item: ItemInflation) =>
-    formatDateString(item.date),
-  );
+export function PriceChart({ data, label, color }: Props) {
+  const labels = data.map((item: ItemInflation) => formatDateString(item.date));
 
-  const avaDataset = avaData ? avaData.map((d: any) => d.value) : [];
-  const ethDataset = ethData ? ethData.map((d: any) => d.value) : [];
+  const dataset = data ? data.map((d: any) => d.value) : [];
 
   return (
     <Line
@@ -22,16 +20,10 @@ export function PriceChart({ avaData, ethData }: Props) {
         labels,
         datasets: [
           {
-            label: 'Avalanche',
-            data: avaDataset,
-            borderColor: 'rgb(232, 65, 66)',
-            backgroundColor: 'rgba(232, 65, 66, 0.5)',
-          },
-          {
-            label: 'Ethereum',
-            data: ethDataset,
-            borderColor: 'rgb(28, 28, 225)',
-            backgroundColor: 'rgba(28, 28, 225, 0.5)',
+            label,
+            data: dataset,
+            borderColor: color,
+            backgroundColor: color,
           },
         ],
       }}
