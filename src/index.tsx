@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import './old.css';
+import './fonts.css';
 import './apeisland.css';
 import { App } from './App/App';
 import reportWebVitals from './reportWebVitals';
