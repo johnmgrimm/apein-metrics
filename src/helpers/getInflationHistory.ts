@@ -43,9 +43,15 @@ export async function getInflationHistory(
     const minted = mintHistory.find(
       (mint) => convertIdToTimestamp(mint.id) === item.date,
     );
-    const dailyTotal =
-      (minted ? (minted.dailySubtotal1 + minted.dailySubtotal2) / 1e18 : 0) -
-      (burned ? burned.dailySubtotal / 1e18 : 0);
+    // In case of minting total value has to be divided by 2
+    // As there are duplicated transactions returned by the Covalent API
+    // for every mint operation that send tokens to 2 addresses
+    // Check the example: https://api.covalenthq.com/v1/1/address/0x0000000000000000000000000000000000000000/transfers_v2/?key=ckey_f1fbf169cdc04b9dbb6ceea07af&contract-address=0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698&match={"block_signed_at":{"$gt":"2021-09-19","$lt":"2021-09-21"},"transfers.0.transfer_type":"OUT"}
+    const mintedTotal = minted
+      ? (minted.dailySubtotal1 + minted.dailySubtotal2) / 1e18 / 2
+      : 0;
+    const burnedTotal = burned ? burned.dailySubtotal / 1e18 : 0;
+    const dailyTotal = mintedTotal - burnedTotal;
     return {
       date: item.date,
       value: dailyTotal,

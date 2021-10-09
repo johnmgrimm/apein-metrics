@@ -42,8 +42,8 @@ describe('getInflationHistory', () => {
           month: 10,
           day: 7,
         },
-        dailySubtotal1: 1.5093807e22,
-        dailySubtotal2: 1.5093807e22,
+        dailySubtotal1: 1.8093807e22,
+        dailySubtotal2: 1.8093807e22,
       },
       {
         id: {
@@ -59,8 +59,8 @@ describe('getInflationHistory', () => {
     const transfers = await getInflationHistory(1, contractIdEthereum, 3);
     expect(transfers).toStrictEqual([
       { date: 1633478400000, value: 0 },
-      { date: 1633564800000, value: 15093.807 },
-      { date: 1633651200000, value: 60400.00000000001 },
+      { date: 1633564800000, value: 3000 },
+      { date: 1633651200000, value: 30200.000000000004 },
     ]);
   });
 });
