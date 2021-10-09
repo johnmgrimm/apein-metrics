@@ -1,4 +1,5 @@
 import React from 'react';
+import { contractIdAvalanche, contractIdEthereum } from '../../helpers/consts';
 import { Chain, Stats } from '../../helpers/getStats';
 
 type Props = {
@@ -22,7 +23,11 @@ export function TokenStats({ chain, data, loading }: Props) {
         >
           <div className="metric">
             <a
-              href="https://www.coingecko.com/en/coins/ape-in"
+              href={
+                chain === 'avalanche'
+                  ? `https://info.pangolin.exchange/#/token/${contractIdAvalanche}`
+                  : `https://analytics.sushi.com/tokens/${contractIdEthereum}`
+              }
               target="_blank"
               rel="noreferrer"
               className="link-block-3 w-inline-block"
@@ -38,7 +43,11 @@ export function TokenStats({ chain, data, loading }: Props) {
         >
           <div className="metric">
             <a
-              href="https://etherscan.io/token/0x8bbf1dccbedd5c70d8e793d432fb56b848dd1698"
+              href={
+                chain === 'avalanche'
+                  ? `https://cchain.explorer.avax.network/tokens/${contractIdAvalanche}`
+                  : `https://etherscan.io/token/${contractIdEthereum}`
+              }
               target="_blank"
               rel="noreferrer"
               className="link-block-3 w-inline-block"

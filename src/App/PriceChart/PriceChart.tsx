@@ -1,13 +1,7 @@
 import React from 'react';
 import { Line } from 'react-chartjs-2';
+import { formatDateString } from '../../helpers/formatDateString';
 import { ItemInflation } from '../../helpers/getInflationHistory';
-import dayjs from 'dayjs';
-import utc from 'dayjs/plugin/utc';
-dayjs.extend(utc);
-
-function convertToDateString(timestamp: number) {
-  return dayjs.utc(timestamp).format("D MMM 'YY");
-}
 
 type Props = {
   avaData: ItemInflation[];
@@ -16,7 +10,7 @@ type Props = {
 
 export function PriceChart({ avaData, ethData }: Props) {
   const labels = avaData.map((item: ItemInflation) =>
-    convertToDateString(item.date),
+    formatDateString(item.date),
   );
 
   const avaDataset = avaData ? avaData.map((d: any) => d.value) : [];
