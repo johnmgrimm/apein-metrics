@@ -9,7 +9,7 @@ type Props = {
 };
 export function TokenStats({ chain, data, loading }: Props) {
   return (
-    <div className="w-layout-grid grid-13">
+    <>
       <h4
         id="w-node-_8f0eaf22-a83d-f6fc-a7e8-620735c64873-68d99d19"
         className="metric-subheading"
@@ -99,6 +99,6 @@ export function TokenStats({ chain, data, loading }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

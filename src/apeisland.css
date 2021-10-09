@@ -252,6 +252,9 @@ html.w-mod-touch * {
   max-width: 100%;
   display: inline-block;
 }
+a.w-inline-block {
+  border-bottom: none;
+}
 .w-clearfix:before,
 .w-clearfix:after {
   content: ' ';
@@ -6830,13 +6833,19 @@ blockquote {
   display: block;
   max-width: 900px;
   margin-top: 15px;
-  padding: 20px;
+  padding: 20px 10px;
   border-style: solid;
   border-width: 5px;
   border-color: #c63;
   border-radius: 10px;
   background-color: rgba(252, 236, 210, 0.77);
   box-shadow: 0 0 1px 0 #000;
+}
+
+@media screen and (min-width: 991px) {
+  .container-6 {
+    padding: 20px;
+  }
 }
 
 .section-6 {
@@ -7211,7 +7220,8 @@ blockquote {
 }
 
 .div-block-14 {
-  max-width: 70vw;
+  max-width: 100%;
+  margin: 0;
   margin-right: auto;
   margin-left: auto;
 }
@@ -7243,6 +7253,7 @@ blockquote {
   color: #c63;
   text-align: center;
   text-transform: uppercase;
+  padding-top: 20px;
 }
 
 .text-block-18 {
@@ -7655,7 +7666,7 @@ blockquote {
   }
 
   .container-6 {
-    max-width: 90vw;
+    max-width: 100%;
   }
 
   .section-6 {

@@ -17,7 +17,6 @@ export function InflationChart({ avaData, ethData }: Props) {
   const ethDataset = ethData ? ethData.map((d: any) => d.value) : [];
   return (
     <Line
-      // style={{ height: '346px' }}
       data={{
         labels,
         datasets: [
@@ -25,13 +24,13 @@ export function InflationChart({ avaData, ethData }: Props) {
             label: 'Avalanche',
             data: avaDataset,
             borderColor: 'rgb(232, 65, 66)',
-            backgroundColor: 'rgba(232, 65, 66, 0.5)',
+            backgroundColor: 'rgba(232, 65, 66)',
           },
           {
             label: 'Ethereum',
             data: ethDataset,
             borderColor: 'rgb(28, 28, 225)',
-            backgroundColor: 'rgba(28, 28, 225, 0.5)',
+            backgroundColor: 'rgba(28, 28, 225)',
           },
         ],
       }}

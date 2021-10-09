@@ -70,64 +70,66 @@ export function App() {
           <div className="div-block-14">
             <h3 className="heading-3-copy">Token Stats</h3>
             <div className="w-layout-grid grid-12">
-              <TokenStats
-                chain="ethereum"
-                data={ethData.value}
-                loading={ethData.loading}
-              />
-              <TokenStats
-                chain="avalanche"
-                data={avaData.value}
-                loading={avaData.loading}
-              />
-            </div>
-            <div className="w-layout-grid grid-8">
-              <div className="w-layout-grid grid-12">
-                <div className="w-layout-grid grid-13">
-                  <div
-                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
-                    className="metric-label"
-                  >
-                    Price history
-                  </div>
-                  <div
-                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
-                    className="metric-chart"
-                  >
-                    <PriceChart
-                      label="Ethereum"
-                      color="rgb(28, 28, 225)"
-                      data={
-                        ethData.value
-                          ? ethData.value.priceHistory
-                          : initialHistory
-                      }
-                    />
-                  </div>
+              <div className="w-layout-grid grid-13">
+                <TokenStats
+                  chain="ethereum"
+                  data={ethData.value}
+                  loading={ethData.loading}
+                />
+                <div
+                  id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
+                  className="metric-label"
+                >
+                  Price history
                 </div>
-                <div className="w-layout-grid grid-13">
-                  <div
-                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
-                    className="metric-label"
-                  >
-                    Price history
-                  </div>
-                  <div
-                    id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
-                    className="metric-chart"
-                  >
-                    <PriceChart
-                      label="Avalanche"
-                      color="rgb(232, 65, 66)"
-                      data={
-                        avaData.value
-                          ? avaData.value.priceHistory
-                          : initialHistory
-                      }
-                    />
-                  </div>
+                <div
+                  id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
+                  className="metric-chart"
+                >
+                  <PriceChart
+                    label="Ethereum"
+                    color="rgb(28, 28, 225)"
+                    data={
+                      ethData.value
+                        ? ethData.value.priceHistory
+                        : initialHistory
+                    }
+                  />
                 </div>
               </div>
+              <div className="w-layout-grid grid-13">
+                <TokenStats
+                  chain="avalanche"
+                  data={avaData.value}
+                  loading={avaData.loading}
+                />
+                <div
+                  id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c4-68d99d19"
+                  className="metric-label"
+                >
+                  Price history
+                </div>
+                <div
+                  id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c2-68d99d19"
+                  className="metric-chart"
+                >
+                  <PriceChart
+                    label="Avalanche"
+                    color="rgb(232, 65, 66)"
+                    data={
+                      avaData.value
+                        ? avaData.value.priceHistory
+                        : initialHistory
+                    }
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="w-layout-grid grid-12">
+              <div className="w-layout-grid grid-13"></div>
+              <div className="w-layout-grid grid-13"></div>
+            </div>
+            <div className="w-layout-grid grid-13">
               <div
                 id="w-node-_92fdbe46-5fb6-de1b-0e1e-cd2a79e492c6-68d99d19"
                 className="metric-chart-label"
@@ -265,36 +267,36 @@ export function App() {
                     ? '--'
                     : nftData.value.ava_ape_3 + nftData.value.eth_ape_3}
                 </div>
-                <div
-                  id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf001-68d99d19"
-                  className="metric-text"
+                <a
+                  href={getEtherscanTokenUrl(contractIdNftEthereum3)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-inline-block"
                 >
-                  <a
-                    href={getEtherscanTokenUrl(contractIdNftEthereum3)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-inline-block"
+                  <div
+                    id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf001-68d99d19"
+                    className="metric-text"
                   >
                     {nftData.loading || !nftData.value
                       ? '--'
                       : nftData.value.eth_ape_3}
-                  </a>
-                </div>
-                <div
-                  id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf003-68d99d19"
-                  className="metric-text"
+                  </div>
+                </a>
+                <a
+                  href={getCChainTokenUrl(contractIdNftAvalanche3)}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-inline-block"
                 >
-                  <a
-                    href={getCChainTokenUrl(contractIdNftAvalanche3)}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="w-inline-block"
+                  <div
+                    id="w-node-_502d6ad2-4129-2225-be6c-761e27cbf003-68d99d19"
+                    className="metric-text"
                   >
                     {nftData.loading || !nftData.value
                       ? '--'
                       : nftData.value.ava_ape_3}
-                  </a>
-                </div>
+                  </div>
+                </a>
               </div>
               <div className="w-layout-grid grid-10">
                 <div
