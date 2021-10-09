@@ -6,8 +6,10 @@ View the [working mockup](https://apeisland.webflow.io/ape-in-dashboard-mockup) 
 
 ## How to build production release
 
+0. Set your Covalent API key in `.env` file, you can get it for free after signup on https://www.covalenthq.com/platform/#/auth/register/
 1. Adjust "homepage" in `./package.json` file.
 2. Execute `yarn build`.
+
 3. Upload content of the `./build` directory to your server. Files on the server should be accessible using the URL specified as "homepage" in the `./package.json` file (in the 1. step)
 
 OR
