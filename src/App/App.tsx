@@ -376,20 +376,20 @@ export function App() {
                 <div className="metric-text">Season 3 Apes - Ethereum</div>
               </a>
               <a
-                href={getCChainTokenUrl(contractIdNftAvalanche3)}
-                target="_blank"
-                rel="noreferrer"
-                className="link-block-7 w-inline-block"
-              >
-                <div className="metric-text">Season 3 Apes - Avalanche</div>
-              </a>
-              <a
                 href={getEtherscanTokenUrl(contractIdNftEthereumO)}
                 target="_blank"
                 rel="noreferrer"
                 className="link-block-8 w-inline-block"
               >
                 <div className="metric-text">Offspring Apes - Ethereum</div>
+              </a>
+              <a
+                href={getCChainTokenUrl(contractIdNftAvalanche3)}
+                target="_blank"
+                rel="noreferrer"
+                className="link-block-7 w-inline-block"
+              >
+                <div className="metric-text">Ape Island - Avalanche Expansion Season 1</div>
               </a>
             </div>
           </div>
