@@ -87,7 +87,7 @@ export function TokenStats({ chain, data, loading }: Props) {
             id="w-node-_6e457b3f-db38-f798-7bd7-9c6797e6e67c-97e6e67b"
             className="metric"
           >
-            {loading || !data
+            {loading || !data || data.burned === 0
               ? '---,---'
               : Math.round(data.burned).toLocaleString('en-US')}
           </div>

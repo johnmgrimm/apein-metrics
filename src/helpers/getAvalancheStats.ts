@@ -70,40 +70,43 @@ export async function getAvalancheStats() {
     ),
   ]);
 
-  const inflationHistory = await getInflationHistory(
-    avalancheChainId,
-    contractIdAvalanche,
-  );
-
   const priceHistoryPangolin = pangolinData.data.data.token.tokenDayData;
   const priceHistoryJoe = joeData.data.data.token.dayData;
   const priceHistoryDdm = ddmData.data.data.token.tokenDayData;
 
   const initialHistory = getInitialHistory(21);
 
-  const priceHistory = initialHistory.map((item: DataPoint) => {
-    const pricePointPangolin = priceHistoryPangolin.find(
-      (point: { date: number }) => point.date * 1000 === item.date,
-    );
-    const pricePointJoe = priceHistoryJoe.find(
-      (point: { date: number }) => point.date * 1000 === item.date,
-    );
-    const pricePointDdm = priceHistoryDdm.find(
-      (point: { date: number }) => point.date * 1000 === item.date,
-    );
-    return {
-      date: item.date,
-      value:
-        ((pricePointPangolin ? parseFloat(pricePointPangolin.priceUSD) : 0) +
-          (pricePointJoe ? parseFloat(pricePointJoe.priceUSD) : 0) +
-          (pricePointDdm ? parseFloat(pricePointDdm.priceUSD) : 0)) /
-        3,
-    };
-  });
+  const priceHistory = initialHistory
+    .map((item: DataPoint) => {
+      const pricePointPangolin = priceHistoryPangolin.find(
+        (point: { date: number }) => point.date * 1000 === item.date,
+      );
+      const pricePointJoe = priceHistoryJoe.find(
+        (point: { date: number }) => point.date * 1000 === item.date,
+      );
+      const pricePointDdm = priceHistoryDdm.find(
+        (point: { date: number }) => point.date * 1000 === item.date,
+      );
+      return {
+        date: item.date,
+        value:
+          ((pricePointPangolin ? parseFloat(pricePointPangolin.priceUSD) : 0) +
+            (pricePointJoe ? parseFloat(pricePointJoe.priceUSD) : 0) +
+            (pricePointDdm ? parseFloat(pricePointDdm.priceUSD) : 0)) /
+          3,
+      };
+    })
+    .filter((point) => point.value > 0);
 
-  const price = priceHistory[priceHistory.length - 1].value;
+  const inflationHistory = await getInflationHistory(
+    avalancheChainId,
+    contractIdAvalanche,
+  );
 
   const burned = await getTotalBurned(avalancheChainId, contractIdAvalanche);
+
+  const price =
+    priceHistory.length > 0 ? priceHistory[priceHistory.length - 1].value : 0;
 
   const marketCap = totalSupply * price;
   return {
