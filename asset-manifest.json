@@ -1,23 +1,23 @@
 {
   "files": {
     "main.css": "/apein-metrics/static/css/main.56c82b19.chunk.css",
-    "main.js": "/apein-metrics/static/js/main.b0d963a3.chunk.js",
-    "main.js.map": "/apein-metrics/static/js/main.b0d963a3.chunk.js.map",
+    "main.js": "/apein-metrics/static/js/main.b89d3a5c.chunk.js",
+    "main.js.map": "/apein-metrics/static/js/main.b89d3a5c.chunk.js.map",
     "runtime-main.js": "/apein-metrics/static/js/runtime-main.0b752729.js",
     "runtime-main.js.map": "/apein-metrics/static/js/runtime-main.0b752729.js.map",
-    "static/js/2.ac1a3142.chunk.js": "/apein-metrics/static/js/2.ac1a3142.chunk.js",
-    "static/js/2.ac1a3142.chunk.js.map": "/apein-metrics/static/js/2.ac1a3142.chunk.js.map",
+    "static/js/2.45eee75c.chunk.js": "/apein-metrics/static/js/2.45eee75c.chunk.js",
+    "static/js/2.45eee75c.chunk.js.map": "/apein-metrics/static/js/2.45eee75c.chunk.js.map",
     "static/js/3.6dae1cc1.chunk.js": "/apein-metrics/static/js/3.6dae1cc1.chunk.js",
     "static/js/3.6dae1cc1.chunk.js.map": "/apein-metrics/static/js/3.6dae1cc1.chunk.js.map",
     "index.html": "/apein-metrics/index.html",
     "static/css/main.56c82b19.chunk.css.map": "/apein-metrics/static/css/main.56c82b19.chunk.css.map",
-    "static/js/2.ac1a3142.chunk.js.LICENSE.txt": "/apein-metrics/static/js/2.ac1a3142.chunk.js.LICENSE.txt",
+    "static/js/2.45eee75c.chunk.js.LICENSE.txt": "/apein-metrics/static/js/2.45eee75c.chunk.js.LICENSE.txt",
     "static/media/logo.aafef0f8.svg": "/apein-metrics/static/media/logo.aafef0f8.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0b752729.js",
-    "static/js/2.ac1a3142.chunk.js",
+    "static/js/2.45eee75c.chunk.js",
     "static/css/main.56c82b19.chunk.css",
-    "static/js/main.b0d963a3.chunk.js"
+    "static/js/main.b89d3a5c.chunk.js"
   ]
 }
