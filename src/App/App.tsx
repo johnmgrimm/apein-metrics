@@ -389,7 +389,9 @@ export function App() {
                 rel="noreferrer"
                 className="link-block-7 w-inline-block"
               >
-                <div className="metric-text">Ape Island - Avalanche Expansion Season 1</div>
+                <div className="metric-text">
+                  Ape Island - Avalanche Expansion Season 1
+                </div>
               </a>
             </div>
           </div>
