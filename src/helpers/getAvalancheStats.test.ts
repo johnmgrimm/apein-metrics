@@ -99,10 +99,6 @@ describe('getAvalancheStats', () => {
                   date: 1632096000,
                   priceUSD: '80.16172842518431667975816007738979',
                 },
-                {
-                  date: 1632182400,
-                  priceUSD: '85.90615456749739095962579236282512',
-                },
               ],
               totalSupply: '20568',
             },
@@ -113,8 +109,8 @@ describe('getAvalancheStats', () => {
     const stats = await getAvalancheStats();
     expect(stats).toStrictEqual({
       burned: 123,
-      marketCap: 1073826.9320937174,
-      price: 28.635384855832466,
+      marketCap: 1129482.9146086217,
+      price: 30.11954438956325,
       totalSupply: 37500,
       inflationHistory: [],
       priceHistory: [
@@ -133,10 +129,6 @@ describe('getAvalancheStats', () => {
         {
           date: 1632096000000,
           value: 30.11954438956325,
-        },
-        {
-          date: 1632182400000,
-          value: 28.635384855832466,
         },
       ],
     });

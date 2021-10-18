@@ -47,11 +47,11 @@ describe('getEthereumStats', () => {
           token: {
             dayData: [
               {
-                date: 1628985600,
+                date: 1631577600,
                 priceUSD: '14.75296046357589169756107956183043',
               },
               {
-                date: 1629072000,
+                date: 1632096000,
                 priceUSD: '13.64942801144816875015932881131023',
               },
             ],
@@ -66,30 +66,18 @@ describe('getEthereumStats', () => {
     const stats = await getEthereumStats();
     expect(stats).toStrictEqual({
       burned: 30200,
-      marketCap: 0,
-      price: 0,
+      marketCap: 3102350.757084335,
+      price: 13.649428011448169,
       totalSupply: 227287.968,
       inflationHistory: [{ date: 123123123, value: 123 }],
       priceHistory: [
         {
-          date: 1630972800000,
-          value: 0,
-        },
-        {
           date: 1631577600000,
-          value: 0,
-        },
-        {
-          date: 1631664000000,
-          value: 0,
+          value: 14.752960463575892,
         },
         {
           date: 1632096000000,
-          value: 0,
-        },
-        {
-          date: 1632182400000,
-          value: 0,
+          value: 13.649428011448169,
         },
       ],
     });

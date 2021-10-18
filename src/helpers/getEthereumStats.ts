@@ -27,15 +27,17 @@ export async function getEthereumStats() {
 
   const initialHistory = getInitialHistory(21);
 
-  const priceHistory = initialHistory.map((item) => {
-    const pricePoint = priceHistoryData.find(
-      (point: { date: number }) => point.date * 1000 === item.date,
-    );
-    return {
-      date: item.date,
-      value: pricePoint ? parseFloat(pricePoint.priceUSD) : 0,
-    };
-  });
+  const priceHistory = initialHistory
+    .map((item) => {
+      const pricePoint = priceHistoryData.find(
+        (point: { date: number }) => point.date * 1000 === item.date,
+      );
+      return {
+        date: item.date,
+        value: pricePoint ? parseFloat(pricePoint.priceUSD) : 0,
+      };
+    })
+    .filter((point) => point.value > 0);
 
   const inflationHistory = await getInflationHistory(
     ethereumChainId,
@@ -44,7 +46,9 @@ export async function getEthereumStats() {
 
   const burned = await getTotalBurned(ethereumChainId, contractIdEthereum);
 
-  const price = priceHistory[priceHistory.length - 1].value;
+  const price =
+    priceHistory.length > 0 ? priceHistory[priceHistory.length - 1].value : 0;
+
   const marketCap = totalSupply * price;
 
   return {
